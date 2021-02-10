@@ -6,9 +6,9 @@ builtin.
 
 the mandatory:
 
-*no userland code should ever mess with underlying ABI, and there are
+**no userland code should ever mess with underlying ABI, and there are
 no excuses for re-reimplementing any part of standard library, because
-stdlibs are written by people who really know what they are doing.*
+stdlibs are written by people who really know what they are doing.**
 
 in the unlikely case you want `printf` in a setting where you absolutely 
 must ditch stdlib, `pf` is a simple reality hack that provides a bare
