@@ -12,7 +12,7 @@ stdlibs are written by people who really know what they are doing.*
 
 in the unlikely case you want `printf` in a setting where you absolutely 
 must ditch stdlib, `pf` is a simple reality hack that provides a bare
-minimum `printf()` at the price of one system call and one non-pedantic 
+minimum `printf()` at a price of one system call and one non-pedantic 
 warning:
 
 ```
