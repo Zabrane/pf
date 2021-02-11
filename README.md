@@ -16,6 +16,7 @@ a bare minimum `printf()` at a price of:
 
 * one syscall `write(2)`
 * one warning `int-conversion`
+* loss of thread safety.
 
 what you get:
 
@@ -24,6 +25,13 @@ what you get:
 * `%d` is also long long, floats are not supprted
 * max number of arguments is defined at compile time (`VMX`)
 * `clang12`, `gcc10`, `tcc-mob`, both 32/64-bit, see `makefile`.
+
+pointer-to|from-integer warning is superfuous and can be ignored. 
+no type-narrowing casts are taking place.
+
+just like its real counterpart, `pf()` is extremely brittle.
+virtually any mismatch between the format string and 
+positional arguments is a segfault.
 
 ```
 $ ./mk (tcc|gcc|clang)
