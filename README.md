@@ -1,6 +1,6 @@
 ## pf(f, a..)
 
-generally speaking, there exists no portable way to implement a nostdlib
+generally speaking, there is no portable way to implement a nostdlib
 shim for `printf(3)`, since `va_arg` is an architecture-specific
 builtin.
 
