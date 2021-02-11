@@ -1,4 +1,4 @@
-## pf(f, a..)
+## pf(f,a..)
 
 `pf()` is a tiny `printf()` shim for embedded systems.
 
