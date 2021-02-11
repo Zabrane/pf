@@ -55,7 +55,7 @@ ptr-to-ULL warning can be safely ignored. no type-narrowing casts are taking pla
 
 > why is it written this way?
 
-because this way is faster to write, easier to read, and safer to run.
+because this way is faster to write, easier to read, and safer to run. your mileage may vary. the code is subject to terms of bsd-2-clause.
 
 ```
 $ make t|c|l|t32|t64|c32|c64|l32|l64|s64
