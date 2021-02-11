@@ -1,12 +1,14 @@
 //! nolibc printf copyright (c) 2020 regents of kparc, bsd-2-clause
-
 #include"_.h"
-#include<unistd.h> //<! write(2)
+//#include<unistd.h> //<! write(2)
 #define VMX 16
-typedef union{S s;G g;J d;_*p;}arg;typedef arg args[VMX];
+typedef union{S s;G g;J d;_*p;}arg;typedef arg args[VMX];J write(I,_*buf,J);
+ZS memset(S x,I c,I n)    {N(n,x[i]=c);R x;}
 
 //! strlen parseint itoa atoi hexstr
-ZG xb[26];ZI sln(S s){I r=0;W(*s++)r++;R r;}ZS ng(S s){R*--s='-',s;}ZS pu(S s,J i){J j;do*--s='0'+i-10*(j=i/10);W(i=j);R s;}
+ZG xb[26];ZI sln(S s){I r=0;W(*s++)r++;R r;}
+
+ZS ng(S s){R*--s='-',s;}ZS pu(S s,J i){J j;do*--s='0'+i-10*(j=i/10);W(i=j);R s;}
 S jS(J i,I*n){S r=0>i?ng(jS(-i,n)):pu(xb+25,i);R*n=25+(xb-r),r;}
 UI sI(S a,I*n){G c;UI i=0,r=*n=0;W((c=*a++)&&IN('0',c,'9'))i++,r=r*10u+((UI)c-'0');R*n=i,r;}ZS hh(S s,G c);
 ZS hh(S s,G c){N(2,G a=i?c&15:c>>4;s[i]="0W"[9<a]+a)R s;}ZI jX(J j){S s=xb+25;J k=j;do hh(s-=2,k);W(k>>=8);R 25-(s-xb);}
@@ -22,7 +24,7 @@ I txj(J x,I p,I l){I n;S r=jS(x,&n);R txp(r,n,p);}I txs(S x,I p,I l){R txp((S)x,
 #define va(c,a,t,f) C(c,n+=f((t)a,flg*flw,prc);) //!< call f((type)nextarg,options)
 #define nx continue;
 
-//! %[fmt][flw][.prc]cdps
+//! %[%-][09..][.09..*]cdps
 I txpf(S f,args a){                   //!< (f)ormat string (aka tape), (a)rguments
  G c;I j,i=0,n=0;                     //!< total le(n)gth, arg(i)ndex, curr(c)har
  UI flg,flw,prc;                      //!< fmt flags, field width, precision
