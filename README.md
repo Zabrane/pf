@@ -23,10 +23,11 @@ what you get:
 * format string parser recognizes `%[%-][09][.09*]cdps`
 * unsupported features are filtered from output
 * `%d` is also long long, floats are not supprted
-* max number of arguments is defined at compile time (`VMX`)
-* `clang12`, `gcc10`, `tcc-mob`, both 32/64-bit, see `makefile`.
+* max number of arguments `VMX` is defined at compile time
+* `clang12`, `gcc10`, `tcc-mob`, both 32/64-bit, see `makefile`
+* freestanding binary size ~9kb.
 
-pointer-to|from-integer warning is superfuous and can be ignored. 
+pointer-to/from-integer warning is superfuous and can be ignored. 
 no type-narrowing casts are taking place.
 
 just like its real counterpart, `pf()` very brittle, e.g. a mismatch
