@@ -17,7 +17,7 @@ ZI txp(S x,I n,I p){R txN(' ',MX(0,p-n))+txn(x,n)+txN(' ',ABS(MN(0,p+n)));}ZI tx
 I txx(J j,I p,I l){I n=jX(j)+2;S b=xb+25-n;*b='0',b[1]='x';R txp(b,n,p);}
 I txj(J x,I p,I l){I n;S r=jS(x,&n);R txp(r,n,p);}I txs(S x,I p,I l){R txp((S)x,l?l:sln(x),p);}
 
-#define pf(f,a...) txpf(f,(arg[VMX]){a}) //!< arguments of pf() as an array of void ptrs, up to VMX
+#define pf(f,a...) txpf(f,(args[VMX]){a}) //!< arguments of pf() as an array of void ptrs, up to VMX
 #define va(c,t,f) C(c,n+=f((t)(a[i++].d),flg*flw,prc);) //!< call f((type)nextarg,options)
 #define nx continue;
 
@@ -26,8 +26,8 @@ I txpf(S f,args a){                //!< (f)ormat string (aka tape), (a)rguments
  G c;I j,i=0,n=0;                     //!< total le(n)gth, arg(i)ndex, curr(c)har
  UI flg,flw,prc;                      //!< fmt flags, field width, precision
  W(c=*f++){                           //!< while more chars left on tape,
-  NX:flg=prc=0,flg=j=1;               //!< reset state, then:
-  Z('%'-c,tx(c);nx)                   //!< echo c unless %, otherwise:
+  flg=prc=0,flg=j=1;                  //!< reset state, then:
+  Z('%'-c,tx(c);NXT)                  //!< echo c unless %, otherwise:
   W(j)SW(c=*f,C('-',flg=-1,f++),j=0)  //!< scan flags (%flg)
   flw=sI(f,&j),f+=j,c=*f;             //!< scan field width (%flw)
   Z('.'==c,prc=sI(++f,&j);f+=j;c=*f;  //!< scan precision (%.prc)
@@ -39,6 +39,7 @@ I txpf(S f,args a){                //!< (f)ormat string (aka tape), (a)rguments
    va('p',J,txx)va('s',S,txs))
   f++;}R n;}
 
+_ exit(I);
 I main(I c,char**a){
 
   S t_prc="kparcxxxx";
@@ -56,7 +57,7 @@ I main(I c,char**a){
     "i uncover", "the soul-destroying", "abhorrence",0xcafebabe,'K',0x04),
   "//:~");
 
-  R 0;}
+  R exit(0),0;}
 
 
 //:~
