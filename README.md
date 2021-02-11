@@ -18,6 +18,12 @@ warning:
 ```
 $ ./mk (tcc|gcc|clang)
 
+  (%)=(%) (kparc)=(kparc) (kparc)=(kparc) ()=()
+
+  jmx = 9223372036854775807
+  imn =         -2147483647
+  imx =          2147483647
+
   0|atw     |     atw|  3|3  |  0xdeadbeef|0x04 |  k|k  |%|
   1|nsl     |     nsl|  3|3  |  0xdeadbeef|0x04 |  k|k  |%|
   2|attila  |  attila|  6|6  |  0xdeadbeef|0x04 |  k|k  |%|
@@ -25,12 +31,10 @@ $ ./mk (tcc|gcc|clang)
   4|alex    |    alex|  4|4  |  0xdeadbeef|0x04 |  k|k  |%|
   5|kparc   |   kparc|  5|5  |  0xdeadbeef|0x04 |  k|k  |%|
 
- pf: d=(-2147483647 2147483647) s=(i uncover the soul-destroying abhorrence) p=(0x0xcafebabe) c=(K) eot=(0x0x04) n=(74) //:~
-
-$
+ pf: s=(i uncover the soul-destroying abhorrence) p=(0x0xcafebabe) c=(K) eot=(0x04) n=(53) //:~
 ```
 
-format string parser recognizes `%[-][flw][.prc]cdps`. floats are not supprted.
+format string parser recognizes `%[-][flw][.prc09*]cdps`. `d` supports long long. floats are not supprted.
 
 
 caveat emptor.
