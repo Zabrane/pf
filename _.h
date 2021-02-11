@@ -13,6 +13,7 @@ static UI ws=0;
 #define  Z(b,a...)        if(b){a;}else                          //!< be sure to terminate dangling else.
 #define  C(i,a...)        case i:{a;}break;                      //!< case statement without a forgotten break.
 #define SW(i,c,a...)      switch(i){c default:a;}                //!< default case is separated by a single comma.
+#define NXT               continue
 
 //! avoid explicit ops as much as possible:
 #define MN(x,y)           ((y)>(x)?(x):(y))
@@ -44,5 +45,13 @@ static UI p10[] =         {1,10,100,1000,10000,100000,1000000,10000000,100000000
 static inline             I lg10(UI i){I t=(32-clz(i)+1)*1233>>12;R t-(i<p10[t]);}
 
 #define ABS(e)            ((0>(e))?(-(e)):(e))
+
+#if NOLIBC
+ZS mcp(S d,S s,I n)       {W(n--)*d++=*s++;R d;}
+ZS memmove(S d,S s,I n)   {P(s<d&&d<s+n,d+=n,s+=n;W(n--)*--d=*--s;d)R mcp(d,s,n);}
+ZS memset(S s,I c,I n)    {N(n,s[n]=c);R s;}
+#define mmv memmove
+#define mset memset
+#endif
 
 //:~

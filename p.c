@@ -17,19 +17,18 @@ I txj(J x,I p,I l){I n;S r=jS(x,&n);R txp(r,n,p);}I txs(S x,I p,I l){R txp((S)x,
 #define VMX 16
 #define pf(f,a...) txpf(f,(UJ[VMX]){a}) //!< arguments of pf() as an array of void ptrs, up to VMX
 #define va(c,t,f) C(c,n+=f((t)(a[i++]),flg*flw,prc);) //!< call f((type)nextarg,options)
-#define nx continue;
 
 //! %[fmt][flw][.prc]cdps
 I txpf(S f,UJ a[VMX]){                //!< (f)ormat string (aka tape), (a)rguments
  G c;I j,i=0,n=0;                     //!< total le(n)gth, arg(i)ndex, curr(c)har
  UI flg,flw,prc;                      //!< fmt flags, field width, precision
  W(c=*f++){                           //!< while more chars left on tape,
-  NX:flg=prc=0,flg=j=1;               //!< reset state, then:
-  Z('%'-c,tx(c);nx)                   //!< echo c unless %, otherwise:
+  flg=prc=0,flg=j=1;                  //!< reset state, then:
+  Z('%'-c,tx(c);NXT)                  //!< echo c unless %, otherwise:
   W(j)SW(c=*f,C('-',flg=-1,f++),j=0)  //!< scan flags (%flg)
   flw=sI(f,&j),f+=j,c=*f;             //!< scan field width (%flw)
   Z('.'==c,prc=sI(++f,&j);f+=j;c=*f;  //!< scan precision (%.prc)
-   Z(!j,Z('*'-c,f++;nx)               //!< %.[not 09*] is empty field
+   Z(!j,Z('*'-c,f++;NXT)              //!< %.[not 09*] is empty field
     c=*++f;prc=(I)a[i++];))c=*f;      //!< scan positional precision (%.*)
   W('l'==c||'h'==c)c=*++f;            //!< skip [lh..] nyi
   SW(c,C('%',tx(c))                   //!< conversion specifier dispatch
@@ -37,6 +36,7 @@ I txpf(S f,UJ a[VMX]){                //!< (f)ormat string (aka tape), (a)rgumen
    va('p',J,txx)va('s',S,txs))
   f++;}R n;}
 
+_ exit(I);
 I main(I c,char**a){
 
   S t_prc="kparcxxxx";
@@ -51,10 +51,10 @@ I main(I c,char**a){
 
   pf(" n=(%d) %s\n\n",
    pf("\n pf: s=(%s %s %s) p=(0x%p) c=(%c) eot=(%p)",
-    "i uncover", "the soul-destroying", "abhorrence",0xcafebabe,'K',0x04),\
+    "i uncover", "the soul-destroying", "abhorrence",0xcafebabe,'K',0x04),
   "//:~");
 
-  R 0;}
+  R exit(0),0;}
 
 
 //:~
