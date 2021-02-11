@@ -38,16 +38,18 @@ $ make t32|t64|c32|c64|l32|l64|s64
 
   (%)=(%) (kparc)=(kparc) (kparc)=(kparc) ()=()
 
-  jmx = 9223372036854775807
-  imn =         -2147483647
-  imx =          2147483647
+  umx = (18446744073709551615)
+  jmx = ( 9223372036854775807)
+  imn = (         -2147483647)
+  imx = (          2147483647)
 
   0|atw     |     atw|  3|3  |  0xdeadbeef|0x04 |  k|k  |%|
   1|nsl     |     nsl|  3|3  |  0xdeadbeef|0x04 |  k|k  |%|
   2|attila  |  attila|  6|6  |  0xdeadbeef|0x04 |  k|k  |%|
   3|icsa    |    icsa|  4|4  |  0xdeadbeef|0x04 |  k|k  |%|
   4|alex    |    alex|  4|4  |  0xdeadbeef|0x04 |  k|k  |%|
-  5|kparc   |   kparc|  5|5  |  0xdeadbeef|0x04 |  k|k  |%|
+  5|ktye    |    ktye|  4|4  |  0xdeadbeef|0x04 |  k|k  |%|
+  6|kparc   |   kparc|  5|5  |  0xdeadbeef|0x04 |  k|k  |%|
 
  pf: s=(i uncover the soul-destroying abhorrence) p=(0xcafebabe) c=(K) eot=(0x04) n=(53) //:~
 ```
