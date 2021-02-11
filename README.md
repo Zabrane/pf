@@ -51,7 +51,7 @@ to trick `gcc` into thinking that ptr-to-ULL coercion is not an error (`tcc` and
 
 > why `int-conversion` warning?
 
-ptr-to-ULL warning can be safely ignored. no type-narrowing casts are taking place.
+ptr-to-ULL warning can be safely ignored. no lossy casts are taking place.
 
 > why this software is written this way?
 
