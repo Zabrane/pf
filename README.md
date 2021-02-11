@@ -14,12 +14,16 @@ however, in the unlikely case you want `printf` in a setting where you
 absolutely must ditch stdlib, `pf` is a simple reality hack that provides
 a bare minimum `printf()` at a price of:
 
-* one system call `write(2)`
+* one syscall `write(2)`
 * one warning `int-conversion`
 
+what you get:
+
 * format string parser recognizes `%[%-][09][.09*]cdps`
-* `d` supports long long, floats are not supprted
-* max number of arguments `VMX` must be configured at compile time.
+* unsupported features are filtered from output
+* `%d` is also long long, floats are not supprted
+* max number of arguments is defined at compile time (`VMX`)
+* `clang12`, `gcc10`, `tcc-mob`, both 32/64-bit, see `makefile`.
 
 ```
 $ ./mk (tcc|gcc|clang)
