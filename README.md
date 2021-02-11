@@ -53,6 +53,9 @@ to trick `gcc` into thinking that ptr-to-ULL coercion is not an error (`tcc` and
 
 ptr-to-ULL warning can be safely ignored. no type-narrowing casts are taking place.
 
+> why is it written this way?
+
+because this way is faster to write, easier to read, and safer to run.
 
 ```
 $ make t|c|l|t32|t64|c32|c64|l32|l64|s64
