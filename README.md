@@ -17,7 +17,7 @@ a bare minimum `printf()` at a price of:
 * one system call `write(2)`
 * one warning `int-conversion`
 
-* format string parser recognizes `%[-][09][.09*]cdps`
+* format string parser recognizes `%[%-][09][.09*]cdps`
 * `d` supports long long, floats are not supprted
 * max number of arguments `VMX` must be configured at compile time.
 
