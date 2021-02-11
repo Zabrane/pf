@@ -25,10 +25,7 @@ what you get:
 * `%d` and `%u` are also long longs
 * max number of arguments `VMX` is defined at compile time
 * `clang12`, `gcc10`, `tcc-mob`, both 32/64-bit, see `makefile`
-* freestanding binary size ~9kb.
-
-pointer-to/from-integer warning is superfuous and can be ignored. 
-no type-narrowing casts are taking place.
+* freestanding binary ~9kb.
 
 just like its real counterpart, `pf()` is extremely brittle, i.e. any mismatch
 between the format string and positional arguments is probably a segfault.
@@ -44,6 +41,11 @@ an anonymous uint64 array of length `VMX`, which is passed to `txpf()` on stack.
 > why the dummy `union{UJ}`?
 
 to trick `gcc` into thinking that ptr-to-ULL coercion is not an error (`tcc` and `clang` are aware of that).
+
+> why `int-conversion` warning?
+
+pointer-to/from-ull warning is superfuous and can be ignored. no type-narrowing casts are taking place.
+
 
 ```
 $ make t|c|l|t32|t64|c32|c64|l32|l64|s64
