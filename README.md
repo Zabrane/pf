@@ -12,8 +12,12 @@ stdlibs are written by people who really know what they are doing.**
 
 however, in the unlikely case you want `printf` in a setting where you 
 absolutely must ditch stdlib, `pf` is a simple reality hack that provides
-a bare minimum `printf()` at a price of one system call and one non-pedantic 
-warning:
+a bare minimum `printf()` at a price of:
+
+* one system call `write(2)`
+* one warning `int-conversion`
+
+maximum number of arguments is limited and must configured at compile time, see `VMX`.
 
 ```
 $ ./mk (tcc|gcc|clang)
