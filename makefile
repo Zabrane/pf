@@ -1,4 +1,4 @@
-W=-Wno-int-conversion -Wno-int-to-pointer-cast
+W=-fno-common -fno-asynchronous-unwind-tables -fno-stack-protector -Wno-int-conversion -Wno-int-to-pointer-cast
 O=pf
 
 t32:
@@ -17,6 +17,6 @@ l64:
 	@clang -DNOLC=1 -ffreestanding -o$O $W  -Wno-pointer-sign *.c  -Os && ./$O
 
 s64:
-	@clang -Wno-pointer-sign $W -shared -fPIC -nostdlib -rdynamic *.c -Os -o lib$O.so
+	@clang -DLIB -Wno-pointer-sign $W -shared -fPIC -nostdlib -rdynamic *.c -Os -o lib$O.so
 
 #/:~

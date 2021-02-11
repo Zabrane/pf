@@ -45,6 +45,8 @@ _ exit(I);
 #if NOLC
 ZS memset(S x,I c,I n){N(n,x[i]=c);R x;}ZS memcpy(S d,S s,I n){W(n--)*d++=*s++;R d;}
 #endif
+
+#ifndef LIB
 I main(I c,char**a){
 
   ZS t_prc="kparcxxxx";
@@ -53,8 +55,8 @@ I main(I c,char**a){
   UJ umx = 18446744073709551615ULL;J jmx=9223372036854775807LL;I imn=-2147483647,imx=2147483647;
   pf("\n  umx = (%20u)\n  jmx = (%20d)\n  imn = (%20d)\n  imx = (%20d)\n",umx,jmx,imn,imx);
 
-  I n;S ti,t[]={"atw","nsl","attila","icsa","alex","kparc"};pf("\n");
-  N(6,ti=t[i],n=sln(ti);pf("%3d|%-8s|%8s|%3d|%-3d|%12p|%-5p|%3c|%-3c|%%|\n",i,ti,ti,n,n,0xdeadbeef,0x04,'k','k'))
+  I n;S ti,t[]={"atw","nsl","attila","icsa","alex","ktye","kparc"};pf("\n");
+  N(7,ti=t[i],n=sln(ti);pf("%3d|%-8s|%8s|%3d|%-3d|%12p|%-5p|%3c|%-3c|%%|\n",i,ti,ti,n,n,0xdeadbeef,0x04,'k','k'))
 
   pf(" n=(%d) %s\n\n",
    pf("\n pf: s=(%s %s %s) p=(%p) c=(%c) eot=(%p)",
@@ -62,5 +64,6 @@ I main(I c,char**a){
   ,"//:~");
 
   R exit(0),0;}
+#endif
 
 //:~
