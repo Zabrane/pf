@@ -20,7 +20,7 @@ I txj(J x,I p,I l){I n;S r=jS(x,&n);R txp(r,n,p);}I txs(S x,I p,I l){R txp((S)x,
 #define vi a[i++]
 #define pf(f,a...) txpf(f,(args){a}) //!< arguments of pf() as an array of void ptrs, up to VMX
 #define va(c,a,t,f) C(c,n+=f((t)a,flg*flw,prc);) //!< call f((type)nextarg,options)
-#define nx continue;
+#define nx continue
 
 //! %[fmt][flw][.prc]cdps
 I txpf(S f,args a){                   //!< (f)ormat string (aka tape), (a)rguments
