@@ -1,9 +1,9 @@
 //! nolibc printf copyright (c) 2020 regents of kparc, bsd-2-clause
 
 #include"_.h"
-
+#include<unistd.h> //<! write(2)
 #define VMX 16
-typedef union{S s;G g;J d;J p;}arg;typedef arg args[VMX];
+typedef union{S s;G g;J d;_*p;}arg;typedef arg args[VMX];
 
 //! strlen parseint itoa atoi hexstr
 ZG xb[26];ZI sln(S s){I r=0;W(*s++)r++;R r;}ZS ng(S s){R*--s='-',s;}ZS pu(S s,J i){J j;do*--s='0'+i-10*(j=i/10);W(i=j);R s;}
@@ -17,12 +17,13 @@ ZI txp(S x,I n,I p){R txN(' ',MX(0,p-n))+txn(x,n)+txN(' ',ABS(MN(0,p+n)));}ZI tx
 I txx(J j,I p,I l){I n=jX(j)+2;S b=xb+25-n;*b='0',b[1]='x';R txp(b,n,p);}
 I txj(J x,I p,I l){I n;S r=jS(x,&n);R txp(r,n,p);}I txs(S x,I p,I l){R txp((S)x,l?l:sln(x),p);}
 
-#define pf(f,a...) txpf(f,(args[VMX]){a}) //!< arguments of pf() as an array of void ptrs, up to VMX
-#define va(c,t,f) C(c,n+=f((t)(a[i++].d),flg*flw,prc);) //!< call f((type)nextarg,options)
+#define vi a[i++]
+#define pf(f,a...) txpf(f,(args){a}) //!< arguments of pf() as an array of void ptrs, up to VMX
+#define va(c,a,t,f) C(c,n+=f((t)a,flg*flw,prc);) //!< call f((type)nextarg,options)
 #define nx continue;
 
 //! %[fmt][flw][.prc]cdps
-I txpf(S f,args a){                //!< (f)ormat string (aka tape), (a)rguments
+I txpf(S f,args a){                   //!< (f)ormat string (aka tape), (a)rguments
  G c;I j,i=0,n=0;                     //!< total le(n)gth, arg(i)ndex, curr(c)har
  UI flg,flw,prc;                      //!< fmt flags, field width, precision
  W(c=*f++){                           //!< while more chars left on tape,
@@ -32,11 +33,11 @@ I txpf(S f,args a){                //!< (f)ormat string (aka tape), (a)rguments
   flw=sI(f,&j),f+=j,c=*f;             //!< scan field width (%flw)
   Z('.'==c,prc=sI(++f,&j);f+=j;c=*f;  //!< scan precision (%.prc)
    Z(!j,Z('*'-c,f++;nx)               //!< %.[not 09*] is empty field
-    c=*++f;prc=(I)a[i++].d;))c=*f;    //!< scan positional precision (%.*)
+    c=*++f;prc=(I)vi.d))c=*f;         //!< scan positional precision (%.*)
   W('l'==c||'h'==c)c=*++f;            //!< skip [lh..] nyi
   SW(c,C('%',tx(c))                   //!< conversion specifier dispatch
-   va('c',G,txb)va('d',J,txj)
-   va('p',J,txx)va('s',S,txs))
+   va('c',vi.g,G,txb)va('d',vi.d,J,txj)
+   va('p',vi.d,J,txx)va('s',vi.s,S,txs))
   f++;}R n;}
 
 _ exit(I);
@@ -53,7 +54,7 @@ I main(I c,char**a){
   N(6,ti=t[i],n=sln(ti);pf("%3d|%-8s|%8s|%3d|%-3d|%12p|%-5p|%3c|%-3c|%%|\n",i,ti,ti,n,n,0xdeadbeef,0x04,'k','k'))
 
   pf(" n=(%d) %s\n\n",
-   pf("\n pf: s=(%s %s %s) p=(0x%p) c=(%c) eot=(%p)",
+   pf("\n pf: s=(%s %s %s) p=(%p) c=(%c) eot=(%p)",
     "i uncover", "the soul-destroying", "abhorrence",0xcafebabe,'K',0x04),
   "//:~");
 

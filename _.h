@@ -1,5 +1,7 @@
-#include<unistd.h>  //!< size_t
-typedef void _;typedef unsigned char*S,G;typedef unsigned short H;typedef int I;typedef unsigned long long UJ,K;typedef long long J;typedef unsigned int UI;typedef size_t szt;
+
+//#include<unistd.h>  //!< size_t
+
+typedef void _;typedef unsigned char*S,G;typedef unsigned short H;typedef int I;typedef unsigned long long UJ,K;typedef long long J;typedef unsigned int UI;
 
 static UI ws=0;
 
