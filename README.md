@@ -24,38 +24,19 @@ what you get:
 * unsupported features are filtered from output
 * `%d` and `%u` are also long longs
 * max number of arguments `VMX` is defined at compile time
-* `clang12`, `gcc10`, `tcc-mob`, both 32/64-bit, see `makefile`
 * freestanding binary ~9kb.
 
 just like its real counterpart, `pf()` is extremely brittle, i.e. any mismatch
 between the format string and positional arguments is probably a segfault.
 
-## faq
+## test
 
-> what's the idea?
+the code is tested with  `clang12`, `gcc10`, `tcc-mob`, both 32/64-bit. `makefile` targets are:
 
-`pf()` is a variadic macro which is used to initialize contents of 
-an anonymous uint64 array of length `VMX`, which is passed to `txpf()` on stack.
-`txpf()` downcasts longs according to the format specification, and prints them.
-
-> what's the catch?
-
-stack overpressure, therefore: a) choose `VMX` wisely b) if you absolutely sure 
-your pointers are 32-bit and you don't need to print longs, redeclare the `union` 
-to use `UI` instead of `UJ`. if you're not sure what any of this means, `pf()` 
-is not for you. caveat emptor.
-
-> why the dummy `union{UJ}`?
-
-to trick `gcc` into thinking that ptr-to-ULL coercion is not an error (`tcc` and `clang` are aware of that).
-
-> why `int-conversion` warning?
-
-ptr-to-ULL warning can be safely ignored. no lossy casts are taking place.
-
-> why this software is written this way?
-
-because this way the software is faster to write, easier to read, and safer to run. your mileage may vary. the code is subject to terms of bsd-2-clause, except `_.h` which is in placed in public domain by the [regents of kparc](https://github.com/kparc).
+* `tcl` fat builds to default arch
+* `[tcl]32` fat to 32-bit
+* `[tcl]64` freestanding nostdlib 64-bit (linux-only, see `64.S`)
+* `s64` dynamic library, for the sake of completeness.
 
 ```
 $ make t|c|l|t32|t64|c32|c64|l32|l64|s64
@@ -77,5 +58,38 @@ $ make t|c|l|t32|t64|c32|c64|l32|l64|s64
 
  pf: s=(i uncover the soul-destroying abhorrence) p=(0xcafebabe) c=(K) eot=(0x04) n=(53) //:~
 ```
+
+
+## faq
+
+> what's the idea?
+
+`pf()` is a variadic macro which is used to initialize contents of 
+an anonymous uint64 array of length `VMX`, which is passed to `txpf()` on stack.
+`txpf()` downcasts longs according to the format specification, and prints them.
+
+> what's the catch?
+
+stack overpressure, therefore: a) choose `VMX` wisely b) if you absolutely sure 
+your pointers are 32-bit and you don't need to print longs, redeclare the `union` 
+to use `UI` instead of `UJ`. if you're not sure what any of this means, `pf()` 
+is not for you. caveat emptor.
+
+> will it work on my operating system?
+
+yes, but if you're lucky to have an operating system, you should use `printf(3)`.
+
+> why the dummy `union{UJ}`?
+
+to trick `gcc` into thinking that ptr-to-ULL coercion is not an error (`tcc` and `clang` are aware of that).
+
+> why `int-conversion` warning?
+
+ptr-to-ULL warning can be safely ignored. no lossy casts are taking place.
+
+> why this software is written this way?
+
+because this way the software is faster to write, easier to read, and safer to run. your mileage may vary. the code is subject to terms of bsd-2-clause, except `_.h` which is in placed in public domain by the [regents of kparc](https://github.com/kparc).
+
 
 `//:~`
