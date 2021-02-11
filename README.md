@@ -16,13 +16,13 @@ a bare minimum `printf()` at a price of:
 
 * one syscall `write(2)`
 * one warning `int-conversion`
-* loss of thread safety.
+* total loss of floats and thread safety.
 
 what you get:
 
 * format string parser recognizes `%[%-][09][.09*]dcups`
 * unsupported features are filtered from output
-* `%d` and `%u` are also long long, floats are not supported
+* `%d` and `%u` are also long longs
 * max number of arguments `VMX` is defined at compile time
 * `clang12`, `gcc10`, `tcc-mob`, both 32/64-bit, see `makefile`
 * freestanding binary size ~9kb.
