@@ -37,7 +37,7 @@ between the format string and positional arguments is probably a segfault.
 
 > what's the idea?
 
-`pf()` is a macro with a variadic argument which is used to initialize contents of 
+`pf()` is a variadic macro which is used to initialize contents of 
 an anonymous uint64 array of length `VMX`, which is passed to `txpf()` on stack.
 `txpf()` downcasts longs according to the format specification, and prints them.
 
