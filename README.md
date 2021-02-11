@@ -1,10 +1,10 @@
 ## pf(f, a..)
 
-generally speaking, there is no portable way to implement a nostdlib
-shim for `printf(3)`, since `va_arg` is an architecture-specific
-builtin.
+`pf()` is a tiny `printf()` shim for embedded systems.
 
-the mandatory:
+generally speaking, there is no portable way to implement a drop-in nostdlib
+replacement for `printf(3)`, since `va_arg` is an architecture-specific
+builtin, hence the mandatory:
 
 **no userland code should ever mess with underlying ABI, and there are
 no excuses for re-reimplementing any part of standard library, because
@@ -30,11 +30,23 @@ what you get:
 pointer-to/from-integer warning is superfuous and can be ignored. 
 no type-narrowing casts are taking place.
 
-just like its real counterpart, `pf()` very brittle, e.g. a mismatch
+just like its real counterpart, `pf()` is extremely brittle, i.e. any mismatch
 between the format string and positional arguments is probably a segfault.
 
+## faq
+
+> what's the idea?
+
+`pf()` is a macro with a variadic argument which is used to initialize contents of 
+an anonymous uint64 array of length `VMX`, which is passed to `txpf()` on stack.
+`txpf()` downcasts longs according to the format specification, and prints them.
+
+> why the dummy `union{UJ}`?
+
+to trick `gcc` into thinking that ptr-to-ULL coercion is not an error (`tcc` and `clang` are aware of that).
+
 ```
-$ make t32|t64|c32|c64|l32|l64|s64
+$ make t|c|l|t32|t64|c32|c64|l32|l64|s64
 
   (%)=(%) (kparc)=(kparc) (kparc)=(kparc) ()=()
 
