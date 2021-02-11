@@ -17,7 +17,9 @@ a bare minimum `printf()` at a price of:
 * one system call `write(2)`
 * one warning `int-conversion`
 
-maximum number of arguments is limited and must configured at compile time, see `VMX`.
+* format string parser recognizes `%[-][09][.09*]cdps`
+* `d` supports long long, floats are not supprted
+* max number of arguments `VMX` must be configured at compile time.
 
 ```
 $ ./mk (tcc|gcc|clang)
@@ -37,9 +39,6 @@ $ ./mk (tcc|gcc|clang)
 
  pf: s=(i uncover the soul-destroying abhorrence) p=(0x0xcafebabe) c=(K) eot=(0x04) n=(53) //:~
 ```
-
-format string parser recognizes `%[-][flw][.prc09*]cdps`. `d` supports long long. floats are not supprted.
-
 
 caveat emptor.
 
