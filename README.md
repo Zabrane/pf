@@ -36,17 +36,23 @@ the code is tested with  `clang12`, `gcc10`, `tcc-mob`, both 32/64-bit. `makefil
 * `tcl` fat builds to default arch
 * `[tcl]32` fat to 32-bit
 * `[tcl]64` freestanding nostdlib 64-bit (linux-only, see `64.S`)
-* `s64` dynamic library, for the sake of completeness.
+* `r` reference output (use `printf` instead of `pf`)
+* `s64` dynamic library (not really useful)
 
 ```
 $ make t|c|l|t32|t64|c32|c64|l32|l64|s64
 
   (%)=(%) (kparc)=(kparc) (kparc)=(kparc) ()=()
 
-  umx = (18446744073709551615)
-  jmx = ( 9223372036854775807)
-  imn = (         -2147483647)
-  imx = (          2147483647)
+   umx = (18446744073709551615)
+   jmn = (-9223372036854775807)
+   jmx = ( 9223372036854775807)
+   imn = (         -2147483647)
+   imx = (          2147483647)
+  uimx = (          4294967295)
+
+  pmx32 = (         0xffffffff)
+  pmx64 = ( 0xffffffffffffffff)
 
   0|atw     |     atw|  3|3  |  0xdeadbeef|0x04 |  k|k  |%|
   1|nsl     |     nsl|  3|3  |  0xdeadbeef|0x04 |  k|k  |%|
