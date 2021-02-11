@@ -2,9 +2,9 @@ W=-Wno-int-conversion -Wno-int-to-pointer-cast
 O=pf
 
 t32:
-	@tcc -m32 -w -funsigned-char -o$O *.c -Os && ./$O
+	@tcc -m32 -w -o$O *.c -Os && ./$O
 t64:
-	@tcc -m64 -DNOLC=1 -nostdlib -w -funsigned-char -o$O *.c 64.S -Os && ./$O
+	@tcc -m64 -DNOLC=1 -nostdlib -w  -o$O *.c 64.S -Os && ./$O
 
 g32:
 	@gcc -m32 $W -o$O *.c -Os && ./$O
