@@ -29,12 +29,11 @@ what you get:
 pointer-to|from-integer warning is superfuous and can be ignored. 
 no type-narrowing casts are taking place.
 
-just like its real counterpart, `pf()` is extremely brittle.
-virtually any mismatch between the format string and 
-positional arguments is a segfault.
+just like its real counterpart, `pf()` very brittle, e.g. a mismatch
+between the format string and positional arguments is probably a segfault.
 
 ```
-$ ./mk (tcc|gcc|clang)
+$ make t32|t64|c32|c64|l32|l64|s64
 
   (%)=(%) (kparc)=(kparc) (kparc)=(kparc) ()=()
 
