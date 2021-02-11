@@ -37,7 +37,7 @@ $ ./mk (tcc|gcc|clang)
   4|alex    |    alex|  4|4  |  0xdeadbeef|0x04 |  k|k  |%|
   5|kparc   |   kparc|  5|5  |  0xdeadbeef|0x04 |  k|k  |%|
 
- pf: s=(i uncover the soul-destroying abhorrence) p=(0x0xcafebabe) c=(K) eot=(0x04) n=(53) //:~
+ pf: s=(i uncover the soul-destroying abhorrence) p=(0xcafebabe) c=(K) eot=(0x04) n=(53) //:~
 ```
 
 caveat emptor.
