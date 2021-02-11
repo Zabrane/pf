@@ -25,7 +25,7 @@ l64:
 s64:
 	@clang -DLIB -Wno-pointer-sign $W -shared -fPIC -nostdlib -rdynamic *.c -Os -o lib$O.so
 
-ref:
+r:
 	@clang -DPRINTF -w -o$O *.c -Os && ./$O
 
 #/:~

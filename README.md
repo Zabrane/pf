@@ -40,7 +40,7 @@ the code is tested with  `clang12`, `gcc10`, `tcc-mob`, both 32/64-bit. `makefil
 * `s64` dynamic library (not really useful)
 
 ```
-$ make t|c|l|t32|t64|c32|c64|l32|l64|s64
+$ make t|c|l|t32|t64|c32|c64|l32|l64|s64|r
 
   (%)=(%) (kparc)=(kparc) (kparc)=(kparc) ()=()
 
