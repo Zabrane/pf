@@ -1,9 +1,6 @@
-
 //#include<unistd.h>  //!< size_t
 
 typedef void _;typedef unsigned char*S,G;typedef unsigned short H;typedef int I;typedef unsigned long long UJ,K;typedef long long J;typedef unsigned int UI;
-
-static UI ws=0;
 
 #define  R                return                                 //!< usually K.
 #define  W(a...)          while(({a;}))                          //!< while is fine.
@@ -15,7 +12,6 @@ static UI ws=0;
 #define  Z(b,a...)        if(b){a;}else                          //!< be sure to terminate dangling else.
 #define  C(i,a...)        case i:{a;}break;                      //!< case statement without a forgotten break.
 #define SW(i,c,a...)      switch(i){c default:a;}                //!< default case is separated by a single comma.
-#define NXT               continue
 
 //! avoid explicit ops as much as possible:
 #define MN(x,y)           ((y)>(x)?(x):(y))

@@ -28,7 +28,7 @@ I txpf(S f,args a){                   //!< (f)ormat string (aka tape), (a)rgumen
  UI flg,flw,prc;                      //!< fmt flags, field width, precision
  W(c=*f++){                           //!< while more chars left on tape,
   flg=prc=0,flg=j=1;                  //!< reset state, then:
-  Z('%'-c,tx(c);NXT)                  //!< echo c unless %, otherwise:
+  Z('%'-c,tx(c);nx)                   //!< echo c unless %, otherwise:
   W(j)SW(c=*f,C('-',flg=-1,f++),j=0)  //!< scan flags (%flg)
   flw=sI(f,&j),f+=j,c=*f;             //!< scan field width (%flw)
   Z('.'==c,prc=sI(++f,&j);f+=j;c=*f;  //!< scan precision (%.prc)
