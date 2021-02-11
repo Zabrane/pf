@@ -44,8 +44,7 @@ to trick `gcc` into thinking that ptr-to-ULL coercion is not an error (`tcc` and
 
 > why `int-conversion` warning?
 
-pointer-to/from-ull warning is superfuous and can be ignored. no type-narrowing casts are taking place.
-
+ptr-to-ULL warning can be safely ignored. no type-narrowing casts are taking place.
 
 ```
 $ make t|c|l|t32|t64|c32|c64|l32|l64|s64
