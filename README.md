@@ -20,9 +20,9 @@ a bare minimum `printf()` at a price of:
 
 what you get:
 
-* format string parser recognizes `%[%-][09][.09*]cdps`
+* format string parser recognizes `%[%-][09][.09*]dcups`
 * unsupported features are filtered from output
-* `%d` is also long long, floats are not supprted
+* `%d` and `%u` are also long long, floats are not supported
 * max number of arguments `VMX` is defined at compile time
 * `clang12`, `gcc10`, `tcc-mob`, both 32/64-bit, see `makefile`
 * freestanding binary size ~9kb.

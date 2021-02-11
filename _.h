@@ -26,6 +26,7 @@ typedef void _;typedef unsigned char*S,G;typedef unsigned short H;typedef int I;
 #define ZJ                static J
 #define ZK                static K
 #define Z_                static _
+#define ZZ                static inline
 
 //! math
 #if (__x86_64__||i386)&&(!__TINYC__)
