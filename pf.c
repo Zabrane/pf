@@ -1,13 +1,11 @@
 //! nolibc printf copyright (c) 2020 regents of kparc, bsd-2-clause
 #include"_.h"
-//#include<unistd.h> //<! write(2)
+#include<unistd.h> //<! size_t write(2)
 #define VMX 16
-typedef union{S s;G g;J d;_*p;}arg;typedef arg args[VMX];J write(I,_*buf,J);
-ZS memset(S x,I c,I n)    {N(n,x[i]=c);R x;}
+typedef union{J j;}arg;typedef arg args[VMX]; //!< avoid gcc error
 
-//! strlen parseint itoa atoi hexstr
+//! strlen memset parseint itoa atoi hexstr
 ZG xb[26];ZI sln(S s){I r=0;W(*s++)r++;R r;}
-
 ZS ng(S s){R*--s='-',s;}ZS pu(S s,J i){J j;do*--s='0'+i-10*(j=i/10);W(i=j);R s;}
 S jS(J i,I*n){S r=0>i?ng(jS(-i,n)):pu(xb+25,i);R*n=25+(xb-r),r;}
 UI sI(S a,I*n){G c;UI i=0,r=*n=0;W((c=*a++)&&IN('0',c,'9'))i++,r=r*10u+((UI)c-'0');R*n=i,r;}ZS hh(S s,G c);
@@ -19,9 +17,9 @@ ZI txp(S x,I n,I p){R txN(' ',MX(0,p-n))+txn(x,n)+txN(' ',ABS(MN(0,p+n)));}ZI tx
 I txx(J j,I p,I l){I n=jX(j)+2;S b=xb+25-n;*b='0',b[1]='x';R txp(b,n,p);}
 I txj(J x,I p,I l){I n;S r=jS(x,&n);R txp(r,n,p);}I txs(S x,I p,I l){R txp((S)x,l?l:sln(x),p);}
 
-#define vi a[i++]
+#define vi (a[i++].j)
 #define pf(f,a...) txpf(f,(args){a}) //!< arguments of pf() as an array of void ptrs, up to VMX
-#define va(c,a,t,f) C(c,n+=f((t)a,flg*flw,prc);) //!< call f((type)nextarg,options)
+#define va(c,t,f) C(c,n+=f((t)vi,flg*flw,prc);) //!< call f((type)nextarg,options)
 #define nx continue;
 
 //! %[%-][09..][.09..*]cdps
@@ -35,18 +33,22 @@ I txpf(S f,args a){                   //!< (f)ormat string (aka tape), (a)rgumen
   flw=sI(f,&j),f+=j,c=*f;             //!< scan field width (%flw)
   Z('.'==c,prc=sI(++f,&j);f+=j;c=*f;  //!< scan precision (%.prc)
    Z(!j,Z('*'-c,f++;nx)               //!< %.[not 09*] is empty field
-    c=*++f;prc=(I)vi.d))c=*f;         //!< scan positional precision (%.*)
+    c=*++f;prc=(I)vi))c=*f;         //!< scan positional precision (%.*)
   W('l'==c||'h'==c)c=*++f;            //!< skip [lh..] nyi
   SW(c,C('%',tx(c))                   //!< conversion specifier dispatch
-   va('c',vi.g,G,txb)va('d',vi.d,J,txj)
-   va('p',vi.d,J,txx)va('s',vi.s,S,txs))
+   va('c',G,txb)va('d',J,txj)
+   va('p',J,txx)
+   va('s',S,txs))
   f++;}R n;}
 
 _ exit(I);
+#if NOLC
+ZS memset(S x,I c,I n){N(n,x[i]=c);R x;}ZS memcpy(S d,S s,I n){W(n--)*d++=*s++;R d;}
+#endif
 I main(I c,char**a){
 
-  S t_prc="kparcxxxx";
-  pf("\n  (%%)=(%%) (kparc)=(%.*s) (kparc)=(%.5s) ()=(%.s)\n",5,t_prc,t_prc,t_prc);
+  ZS t_prc="kparcxxxx";
+  pf("\n  (%%)=(%%) (kparc)=(%.*s) (kparc)=(%.5s) ()=(%.s)\n",5LL,t_prc,t_prc,t_prc);
 
   //UJ ujmx = 18446744073709551615ULL;
   J jmx=9223372036854775807LL;I imn=-2147483647,imx=2147483647;
@@ -57,10 +59,9 @@ I main(I c,char**a){
 
   pf(" n=(%d) %s\n\n",
    pf("\n pf: s=(%s %s %s) p=(%p) c=(%c) eot=(%p)",
-    "i uncover", "the soul-destroying", "abhorrence",0xcafebabe,'K',0x04),
-  "//:~");
+    "i uncover","the soul-destroying","abhorrence",0xcafebabe,'K',0x04)
+  ,"//:~");
 
   R exit(0),0;}
-
 
 //:~
