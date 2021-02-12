@@ -21,7 +21,7 @@ ZI txx(UJ j,I p,I l){I n=jX(j)+2;S b=xb+25-n;*b='0',b[1]='x';R txp(b,n,p);}TU(tx
 ZI txs(S x,I p,I l){R txp((S)x,l?l:sln(x),p);}
 
 #define vi (a[i++].uj)
-#define pf(f,a...) txpf(f,(args){a}) //!< arguments of pf() as an array of void ptrs, up to VMX
+#define pf(f,a...) txpf(f,(args){a})  //!< arguments of pf() coerced to an array of ulls, up to VMX
 #define va(c,t,f) C(c,n+=f((t)vi,flg*flw,prc);) //!< call f((type)nextarg,options)
 #define nx continue
 
