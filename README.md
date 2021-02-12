@@ -1,6 +1,6 @@
 ## pf(f,a..)
 
-`pf()` is a tiny `printf()` shim for embedded systems.
+`pf()` is a tiny `printf(3)` shim for embedded systems.
 
 generally speaking, there is no portable way to implement a drop-in nostdlib
 replacement for `printf(3)`, since `va_arg` is an architecture-specific
@@ -8,11 +8,11 @@ builtin, hence the mandatory:
 
 **no userland code should ever mess with underlying ABI, and there are
 no excuses for re-reimplementing any part of standard library, because
-stdlibs are written by people who really know what they are doing.**
+stdlibs are written by people who really know what they're doing.**
 
 in the unlikely case you want `printf` in a setting where you
 absolutely must ditch stdlib, `pf` is a simple reality hack that provides
-a bare minimum `printf()` at a price of:
+a bare minimum `printf(3)` at a price of:
 
 * one syscall `write(2)`
 * one warning `int-conversion`
@@ -22,8 +22,8 @@ what you get:
 
 * format string parser recognizes `%[%-][09][.09*]dcups`
 * unsupported features are filtered from output
-* `%d` and `%u` are also long longs
-* freestanding binary ~9kb.
+* `%d` and `%u` are also long longs, `[lh]` prefixes are nop.
+* freestanding elf ~9kb.
 
 just like its real counterpart, `pf()` is extremely brittle, i.e. any mismatch
 between the format string and positional arguments is probably a segfault.
@@ -36,9 +36,9 @@ the number of arguments is unbounded, same as for `printf(3)`.
 
 the code is tested with  `clang12`, `gcc10`, `tcc-mob`, both 32- and 64-bit. `makefile` targets are:
 
-* `tcl` fat builds to default arch
-* `[tcl]32` fat to 32-bit
-* `[tcl]64` freestanding nostdlib 64-bit (linux-only, see `64.S`)
+* `[tcl]` fat build to default arch
+* `[tcl]32` fat build to 32-bit
+* `[tcl]64` lean build 64-bit (nostdlib, freestanding, linux-only, see `64.S`)
 * `s64` dynamic library (not really useful for intended use cases)
 * `r` reference output (uses `printf` instead of `pf`)
 
@@ -79,11 +79,11 @@ specification, and prints them.
 
 > what's the catch?
 
-stack overpressure, therefore:
+stack overpressure. too many positional arguments will smash your stack. therefore:
 
 a) if you are using `tcc`, choose `VMX` wisely.
 
-b) if you absolutely sure your pointers are 32-bit and you don't need to print
+b) if you're absolutely sure your pointers are 32-bit and you don't need to print
 longs, redeclare `union` to use `UI` instead of `UJ`. if you're not sure what
 any of this means, `pf()` is not for you. caveat emptor.
 
