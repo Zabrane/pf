@@ -73,14 +73,15 @@ $ make t|c|l|t32|t64|c32|c64|l32|l64|s64|r
 > what's the idea?
 
 `pf()` is a variadic macro which is used to initialize contents of
-an anonymous uint64 array of length `VMX`, which is passed to `txpf()` on stack.
-`txpf()` downcasts longs according to the format specification, and prints them.
+an anonymous uint64 array (of length `VMX` in case of `tcc`), which is passed 
+to `txpf()` on stack. `txpf()` downcasts longs according to the format 
+specification, and prints them.
 
 > what's the catch?
 
 stack overpressure, therefore:
 
-a) if you are using `tcc`, choose `VMX` wisely
+a) if you are using `tcc`, choose `VMX` wisely.
 
 b) if you absolutely sure your pointers are 32-bit and you don't need to print
 longs, redeclare `union` to use `UI` instead of `UJ`. if you're not sure what
