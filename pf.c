@@ -13,7 +13,7 @@ typedef union{UJ uj;}arg;typedef arg args[VMX]; //!< avoid gcc error
 #define TU(f,t,u) ZZ I f(t x,I p,I l){I n;S r=jS(x,&n,u);R txp(r,n,p);}   //!< tx signed/unsigned
 
 //! strlen memset parseint itoa atoi hexstr
-ZG xb[26];ZI sln(S s){I r=0;W(*s++)r++;R r;}ZS ng(S s){R*--s='-',s;}PU(pj,J)PU(pu,UJ);
+ZG xb[26];ZI sln(S s){I r=0;W(*s++)r++;R r;}ZS ng(S s){R*--s='-',s;}PU(pj,J)PU(pu,UJ)
 ZS jS(UJ i,I*n,G u){S r=(!u&&0>(J)i)?ng(jS(-i,n,u)):u?pu(xb+25,i):pj(xb+25,i);R*n=25+(xb-r),r;}
 UI sI(S a,I*n){G c;UI i=0,r=*n=0;W((c=*a++)&&IN('0',c,'9'))i++,r=r*10u+((UI)c-'0');R*n=i,r;}ZS hh(S s,G c);
 ZS hh(S s,G c){N(2,G a=i?c&15:c>>4;s[i]="0W"[9<a]+a)R s;}ZI jX(UJ j){S s=xb+25;UJ k=j;do hh(s-=2,k);W(k>>=8);R 25-(s-xb);}
