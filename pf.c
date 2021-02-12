@@ -58,16 +58,16 @@ I main(I c,char**a){
   ZS t_prc="kparcxxxx";
   pf("\n  (%%)=(%%) (kparc)=(%.*s) (kparc)=(%.5s) ()=(%.s)\n",5LL,t_prc,t_prc,t_prc);
 
-  UJ umx= 18446744073709551615ULL;
-  J  jmx=  9223372036854775807LL;
-  I  imx=           2147483647;
-  UI uimx=          4294967295U;
+  UJ umx  = 18446744073709551615ULL;
+  J  jmx  =   9223372036854775807LL;
+  I  imx  =              2147483647;
+  UI uimx =             4294967295U;
 
   pf("\n   umx = (%20llu)\n   jmn = (%20lld)\n   jmx = (%20lld)\n   imn = (%20d)\n   imx = (%20d)\n  uimx = (%20u)\n",umx,-jmx,jmx,-imx,imx,uimx);
 
   pf("\n  pmx32 = (%19p)\n  pmx64 = (%19p)\n",uimx,umx);
 
-  I n;S ti,t[]={"atw","nsl","attila","icsa","alex","ktye","kparc"};pf("\n");
+  I n;S ti,t[]={"atw","nsl","attila","icsa","alex","ktye","kparc"};tx('\n');
   N(7,ti=t[i],n=sln(ti);pf("%3d|%-8s|%8s|%3d|%-3d|%12p|%-5p|%3c|%-3c|%%|\n",i,ti,ti,n,n,0xdeadbeef,0x04,'k','k'))
 
   pf(" n=(%d) %s\n\n",
