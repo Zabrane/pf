@@ -86,6 +86,8 @@ b) if you absolutely sure your pointers are 32-bit and you don't need to print
 longs, redeclare `union` to use `UI` instead of `UJ`. if you're not sure what
 any of this means, `pf()` is not for you. caveat emptor.
 
+c) protect your stack.
+
 > will it work on my operating system?
 
 yes, but if you're lucky to have an operating system, you should use `printf(3)`.
