@@ -36,8 +36,8 @@ the code is tested with  `clang12`, `gcc10`, `tcc-mob`, both 32/64-bit. `makefil
 * `tcl` fat builds to default arch
 * `[tcl]32` fat to 32-bit
 * `[tcl]64` freestanding nostdlib 64-bit (linux-only, see `64.S`)
-* `r` reference output (use `printf` instead of `pf`)
 * `s64` dynamic library (not really useful)
+* `r` reference output (use `printf` instead of `pf`)
 
 ```
 $ make t|c|l|t32|t64|c32|c64|l32|l64|s64|r
