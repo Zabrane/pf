@@ -3,7 +3,11 @@
 
 #ifndef PRINTF
 #include<unistd.h> //<! size_t write(2)
+#ifdef __TINYC__
 #define VMX 16
+#else
+#define VMX
+#endif
 typedef union{UJ uj;}arg;typedef arg args[VMX]; //!< avoid gcc error
 #define PU(f,t) ZZ S f(S s,t i){t j;do*--s='0'+i-10*(j=i/10);W(i=j);R s;} //!< parse signed/unsigned
 #define TU(f,t,u) ZZ I f(t x,I p,I l){I n;S r=jS(x,&n,u);R txp(r,n,p);}   //!< tx signed/unsigned
