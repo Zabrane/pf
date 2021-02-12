@@ -67,7 +67,7 @@ I main(I c,char**a){
 
   pf("\n  pmx32 = (%19p)\n  pmx64 = (%19p)\n",uimx,umx);
 
-  I n;S ti,t[]={"atw","nsl","attila","icsa","alex","ktye","kparc"};tx('\n');
+  I n;S ti,t[]={"atw","nsl","attila","icsa","alex","ktye","kparc"};pf("\n");
   N(7,ti=t[i],n=sln(ti);pf("%3d|%-8s|%8s|%3d|%-3d|%12p|%-5p|%3c|%-3c|%%|\n",i,ti,ti,n,n,0xdeadbeef,0x04,'k','k'))
 
   pf(" n=(%d) %s\n\n",
