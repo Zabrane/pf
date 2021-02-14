@@ -41,7 +41,7 @@ built-in.
 
 in the unlikely case you want `printf` in a setting where you
 absolutely must ditch stdlib, `pf` is a simple reality hack that provides
-a bare minimum `printf()` at a price of:
+a bare minimum `printf(3)` at a price of:
 
 * one syscall `write(2)`
 * one warning `int-conversion`, supressed.
@@ -52,8 +52,8 @@ what you get:
 
 * format string parser recognizes `%[%-][09][.09*]dcups`
 * unsupported features are filtered from output
-* `%d` and `%u` are also long longs
-* freestanding binary ~9kb.
+* `%d` and `%u` are also long longs, `[lh]` prefixes are nop.
+* freestanding elf ~9kb.
 
 just like its real counterpart, `pf()` is extremely brittle. however, it
 is a bit safer than `printf()` and performs some extra checks, e.g. stray
@@ -149,11 +149,11 @@ specification, and prints them.
 
 > what's the catch?
 
-stack overpressure, therefore:
+stack overpressure. too many positional arguments will smash your stack. therefore:
 
 a) if you are using `tcc`, choose `VMX` wisely.
 
-b) if you absolutely sure your pointers are 32-bit and you don't need to print
+b) if you're absolutely sure your pointers are 32-bit and you don't need to print
 longs, redeclare `union` to use `UI` instead of `UJ`. if you're not sure what
 any of this means, `pf()` is not for you. caveat emptor.
 
@@ -189,7 +189,7 @@ in the future.
 
 > is there anything I can tweak except `PFMX`?
 
-no. there is one extra configuration parameter which breaks posix
+not really. there is one extra configuration parameter which breaks posix
 compatibility and is therefore not documented. there are hardly any 
 user-serviceable parts in the code, so please let us now if you think
 you have found a bug, or have a great feature suggestion in mind.
