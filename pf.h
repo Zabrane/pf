@@ -58,10 +58,9 @@ ZS jS(UJ i,I*n,G u){S r=(!u&&0>(J)i)?ng(jS(-i,n,u)):u?pu(xb+25,i):pj(xb+25,i);R*
 UI sI(char*a,I*n){G c;UI i=0,r=*n=0;W((c=*a++)&&IN('0',c,'9'))i++,r=r*10u+((UI)c-'0');R*n=i,r;}ZS hh(S s,G c);
 ZS hh(S s,G c){N(2,G a=i?c&15:c>>4;s[i]="0W"[9<a]+a)R s;}ZI jX(UJ j){S s=xb+25;UJ k=j;do hh(s-=2,k);W(k>>=8);R 25-(s-xb);}
 
-//! (tx)byte (txn)bytes (txN)times (b)yte (i)nt he(x) (s)tr (p)ad
+//! (tx)byte (txn)bytes (txN)times (b)yte (i)nt he(x) (s)tr (p)ad  (f)lags (p)ad/width (l)ength/prec
 ZI tx(G c){R write(1,&c,1);}ZI txn(S x,I n){P(!n,n)N(n,tx(x[i]));R n;}ZI txN(G c,I n){N(n,tx(c))R n;}
-ZI txp(S x,I n,I p,G pc){R txN(pc,MX(0,p-n))+txn(x,n)+txN(pc,ABS(MN(0,p+n)));}
-ZI txb(G c,I f,I p,I l){R txp(&c,1,PLR,PCH);}
+ZI txp(S x,I n,I p,G pc){R txN(pc,MX(0,p-n))+txn(x,n)+txN(pc,ABS(MN(0,p+n)));}ZI txb(G c,I f,I p,I l){R txp(&c,1,PLR,PCH);}
 ZI txx(UJ j,I f,I p,I l){I n=jX(j)+2;S b=xb+25-n;*b='0',b[1]='x';R txp(b,n,PLR,PCH);}TU(txj,J,0)TU(txu,UJ,1)
 ZI txs(char*x,I f,I p,I l){R txp((S)x,l?l:slen(x),PLR,PCH);}
 
