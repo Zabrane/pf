@@ -49,7 +49,7 @@ typedef union{UJ uj;}arg;typedef arg args[PFSZ];                                
 #define TU(fn,t,u) ZZ I fn(t x,I f,I p,I l){I n;S r=jS(x,&n,u);R txp(r,n,PLR,PCH);} //!< tramsmit signed/unsigned
 #define FG(f)  (1u<<f)               //!< flag bit
 #define fC(fb) ((f&FG(fb))==FG(fb))  //!< check flag bit in f
-#define PCH    (" 0"[fC(2)&&!fC(1)]) //!< pad w/zero, nop when rpad
+#define PCH    (" 0"[fC(2)&&!fC(1)]) //!< zero padding (nop in rpad mode)
 #define PLR    (fC(1)?-p:p)          //!< pad l/r
 
 //! strlen [u]ltoa ato[u]l hex
