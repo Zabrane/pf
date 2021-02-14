@@ -1,6 +1,6 @@
 ## pf(f,a..)
 
-`pf()` is a tiny single-header `printf()` shim for embedded systems.
+`pf()` is a compact single-header `printf()` shim for embedded systems.
 
 ## tl;dr
 
@@ -10,7 +10,7 @@ $ cd pf && cat m.c
 int
 main(int argc, char **argv)
 {
-    printf("\n pf %d.%d %s\n\n", PFV, PFVM, PFL);
+    printf("\n pf %d.%02d.%02d %s\n\n", PFV1, PFV2, PFV3, PFL);
     printf(" hey, %s\n\n", "guacamole!");
     printf(" %p //:~\n\n", 0x04);
     exit(0);
@@ -25,9 +25,9 @@ $ make m
 
  gcc -Os -DPF -DNOLC -nostdlib -ffreestanding -Werror -pedantic -om m.c s.S
 
- rwxrwxr-x 1 kelas kelas 9352 Feb 14 08:16 m
+ rwxrwxr-x 1 kelas kelas 9400 Feb 14 11:18 m
 
- pf 1.0 (c) 2020 kparc / bsd
+ pf 2021.02.14 (c) 2020 kparc / bsd
 
  hey, guacamole!
 
@@ -49,7 +49,7 @@ a bare minimum `printf(3)` at a price of:
 * one syscall `write(2)`.
 * one warning `int-conversion`, suppressed.
 * total loss thread safety.
-* floats.
+* no floats.
 
 what you get:
 
@@ -86,7 +86,7 @@ and supports both 32- and 64-bit. `makefile` targets are:
 ```c
 $ make m|t|c|l|t32|t64|c32|c64|l32|l64|s64|r
 
-  pf 1.0 Linux x86_64 (c) 2020 kparc / bsd
+  pf 2021.02.14 Linux x86_64 (c) 2020 kparc / bsd
 
   (%)=(%) (kparc)=(kparc) (kparc)=(kparc) ()=()
 
@@ -100,13 +100,13 @@ $ make m|t|c|l|t32|t64|c32|c64|l32|l64|s64|r
   pmx32 = (         0xffffffff)
   pmx64 = ( 0xffffffffffffffff)
 
-  0|atw     |     atw|  3|3  |          0xdeadbeef|0x04 |  k|k  |(null)|
-  1|nsl     |     nsl|  3|3  |          0xdeadbeef|0x04 |  k|k  |(null)|
-  2|attila  |  attila|  6|6  |          0xdeadbeef|0x04 |  k|k  |(null)|
-  3|icsa    |    icsa|  4|4  |          0xdeadbeef|0x04 |  k|k  |(null)|
-  4|alex    |    alex|  4|4  |          0xdeadbeef|0x04 |  k|k  |(null)|
-  5|ktye    |    ktye|  4|4  |          0xdeadbeef|0x04 |  k|k  |(null)|
-  6|kparc   |   kparc|  5|5  |          0xdeadbeef|0x04 |  k|k  |(null)|
+  0|     atw|     atw|  3|  3|          0xdeadbeef| 0x04|  k|  k|(null)|
+  1|     nsl|     nsl|  3|  3|          0xdeadbeef| 0x04|  k|  k|(null)|
+  2|  attila|  attila|  6|  6|          0xdeadbeef| 0x04|  k|  k|(null)|
+  3|    icsa|    icsa|  4|  4|          0xdeadbeef| 0x04|  k|  k|(null)|
+  4|    alex|    alex|  4|  4|          0xdeadbeef| 0x04|  k|  k|(null)|
+  5|    ktye|    ktye|  4|  4|          0xdeadbeef| 0x04|  k|  k|(null)|
+  6|   kparc|   kparc|  5|  5|          0xdeadbeef| 0x04|  k|  k|(null)|
 
   (empty arglist) = (ok)
 
@@ -116,8 +116,9 @@ $ make m|t|c|l|t32|t64|c32|c64|l32|l64|s64|r
 
   argc overflow (one)=(one) (two)=(two) (three)=((null)) (four)=((null))
 
-  nesting+retval: s=("i uncover the soul-destroying abhorrence") p=(0xcafebabe)=(3405691582) c=(K) eot=(0x04) n=(108) //:~
+  nesting+retval: s=(i uncover the soul-destroying abhorrence) p=(0xcafebabe)=(3405691582) c=(K) eot=(0x04) n=(108) //:~
 
+$
 ```
 
 ## faq

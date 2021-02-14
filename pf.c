@@ -3,14 +3,14 @@
 #include <string.h> //!< strlen
 #include <stdlib.h> //!< exit
 
-//! configure pf
+//! configure pf for smoke test:
 
 #ifdef __TINYC__
 #define PFMX 10     //!< override default maxargs for tcc
 #else
-#define PFMX  0     //!< unbound for gcc/clang
+#define PFMX  0     //!< unlimited for gcc/clang
 #endif
-#define PFCH  1     //!< treat f < 128 as a char instead of segv
+#define PFCH  1     //!< treat f < 128 as a char instead of segv (breaks posix compat)
 
 #include "pf.h"     //!< include pf()
 
@@ -18,7 +18,7 @@ int
 main(int argc, char**argv)
 {
 
-  printf("\n  pf %d.%d %s %s\n", PFV, PFVM, PFA, PFL);
+  printf("\n  pf %d.%02d.%02d %s %s\n", PFV1, PFV2, PFV3, PFA, PFL);
 
   const char *t_prc = "kparcxxxx";
 
