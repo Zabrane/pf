@@ -1,4 +1,14 @@
-//#include<unistd.h>  //!< size_t
+//! better c, public domain, courtesy of kparc
+
+#pragma once
+#ifndef ATWC_H
+#define ATWC_H
+
+#include<unistd.h>  //!< size_t
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wvariadic-macros"
+#pragma GCC diagnostic ignored "-Wpedantic"                      //<! allow braced groups
 
 typedef void _;typedef unsigned char*S,G;typedef unsigned short H;typedef int I;typedef unsigned long long UJ,K;typedef long long J;typedef unsigned int UI;
 
@@ -12,11 +22,13 @@ typedef void _;typedef unsigned char*S,G;typedef unsigned short H;typedef int I;
 #define  Z(b,a...)        if(b){a;}else                          //!< be sure to terminate dangling else.
 #define  C(i,a...)        case i:{a;}break;                      //!< case statement without a forgotten break.
 #define SW(i,c,a...)      switch(i){c default:a;}                //!< default case is separated by a single comma.
+#define SZ                sizeof
 
 //! avoid explicit ops as much as possible:
 #define MN(x,y)           ((y)>(x)?(x):(y))
 #define MX(x,y)           ((y)>(x)?(y):(x))
 #define IN(l,x,r)         ((l)<=(x)&&(x)<=(r))
+#define CNT(x)            ((SZ(x)/SZ(0[x]))/((size_t)(!(SZ(x)%SZ(0[x])))))
 
 //! limit scope as much as you can:
 #define ZG                static G
@@ -53,4 +65,6 @@ ZS memset(S s,I c,I n)    {N(n,s[n]=c);R s;}
 #define mset memset
 #endif
 
+//#pragma GCC diagnostic pop
+#endif//ATWC_H
 //:~
