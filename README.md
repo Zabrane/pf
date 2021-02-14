@@ -18,7 +18,7 @@ main(int argc, char **argv)
 //:~
 ```
 
-try it:
+try it like so:
 
 ```bash
 $ make m
@@ -164,7 +164,7 @@ compatibility and is therefore not documented. there are hardly any
 user-serviceable parts in the code, so please let us now if you think
 you have found a bug, or have a great feature suggestion in mind.
 
-## faq for the technically inclined
+## more faq
 
 > why the dummy `union{UJ}`?
 
