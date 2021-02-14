@@ -94,19 +94,21 @@ $ make m|t|c|l|t32|t64|c32|c64|l32|l64|s64|r
    jmn = (-9223372036854775807)
    jmx = ( 9223372036854775807)
    imn = (         -2147483647)
-   imx = (          2147483647)
-  uimx = (          4294967295)
+   imx = (2147483647          )
+  uimx = (4294967295          )
 
   pmx32 = (         0xffffffff)
   pmx64 = ( 0xffffffffffffffff)
 
-  0|     atw|     atw|  3|  3|          0xdeadbeef| 0x04|  k|  k|%|asdf|%
-  1|     nsl|     nsl|  3|  3|          0xdeadbeef| 0x04|  k|  k|%|asdf|%
-  2|  attila|  attila|  6|  6|          0xdeadbeef| 0x04|  k|  k|%|asdf|%
-  3|    icsa|    icsa|  4|  4|          0xdeadbeef| 0x04|  k|  k|%|asdf|%
-  4|    alex|    alex|  4|  4|          0xdeadbeef| 0x04|  k|  k|%|asdf|%
-  5|    ktye|    ktye|  4|  4|          0xdeadbeef| 0x04|  k|  k|%|asdf|%
-  6|   kparc|   kparc|  5|  5|          0xdeadbeef| 0x04|  k|  k|%|asdf|%
+  0pad0 = (00077777) (77777   )
+
+  0|atw     |     atw|  3|3  |          0xdeadbeef|0x04 |  k|k  |%|kparc|%|
+  1|nsl     |     nsl|  3|3  |          0xdeadbeef|0x04 |  k|k  |%|kparc|%|
+  2|attila  |  attila|  6|6  |          0xdeadbeef|0x04 |  k|k  |%|kparc|%|
+  3|icsa    |    icsa|  4|4  |          0xdeadbeef|0x04 |  k|k  |%|kparc|%|
+  4|alex    |    alex|  4|4  |          0xdeadbeef|0x04 |  k|k  |%|kparc|%|
+  5|ktye    |    ktye|  4|4  |          0xdeadbeef|0x04 |  k|k  |%|kparc|%|
+  6|kelas   |   kelas|  5|5  |          0xdeadbeef|0x04 |  k|k  |%|kparc|%|
 
   (empty arglist) = (ok)
 
@@ -125,15 +127,15 @@ $
 
 > what's the idea?
 
-`pf(f,a...)` is a variadic macro which is used to initialize an anonymous 
+`pf(f,a...)` is a variadic macro which is used to initialize an anonymous
 array of uint64's (of maximal length `PFMX` in case of `tcc`) with the contents of `a...` on
-stack, and count its elements. array pointer and its element count are both passed to 
+stack, and count its elements. array pointer and its element count are both passed to
 `txpf()`, which `txpf()` downcasts longs according to the format specification, and prints them.
 
 > what's the catch?
 
 since arguments of any type are upcast to `unsigned long long` and passed exclusively on stack,
-`pf()` wins portability in return for much less efficient use of resources compared to ABI-specific 
+`pf()` wins portability in return for much less efficient use of resources compared to ABI-specific
 `va_arg` routines. use those if you can. too many positional arguments will smash your stack, therefore:
 
 a) if you are using `tcc`, choose `VMX` wisely.
@@ -160,7 +162,7 @@ in the future.
 > is there anything I can tweak except `PFMX`?
 
 not really. there is one extra configuration parameter which breaks posix
-compatibility and is therefore not documented. there are hardly any 
+compatibility and is therefore not documented. there are hardly any
 user-serviceable parts in the code, so please let us now if you think
 you have found a bug, or have a great feature suggestion in mind.
 
