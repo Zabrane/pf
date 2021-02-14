@@ -104,7 +104,7 @@ I txpf(char*f,args a,I ac){P(!f,f)             //!< (f)ormat string (aka tape), 
 
 #pragma GCC diagnostic pop
 #else
-#include<string.h>                            //!< use stock printf
+#include<stdio.h>                              //!< use stock printf
 #endif//NOPF
 
 #endif//PF_H

@@ -22,7 +22,7 @@ main(int argc, char**argv)
 
   const char *t_prc = "kparcxxxx";
 
-  printf("\n  (%%)=(%%) (kparc)=(%.*s) (kparc)=(%.5s) ()=(%.s)\n", 5LL, t_prc, t_prc, t_prc);
+  printf("\n  (%%)=(%%) (kparc)=(%.*s) (kparc)=(%.5s) ()=(%.s)\n", 5, t_prc, t_prc, t_prc);
 
   const unsigned long long umx = 18446744073709551615ULL;
   const long long jmx = 9223372036854775807LL;

@@ -39,7 +39,7 @@ s64:
 	@$L $F -DLIB -Wno-pointer-sign $W -shared -fPIC -nostdlib -rdynamic $S -Os -o lib$O.so
 
 r:
-	@$L -w -o$O $S -Os -DNOPF -DPFA="\"$A\"" && ./$O
+	@$G -Wno-format $F -o$O $S -Os -DNOPF -DPFA="\"$A\"" && ./$O
 
 arm64:
 	@$L $F -m64 -DNOLC -nostdlib -ffreestanding -o$O $W $S -Os && ./$O
