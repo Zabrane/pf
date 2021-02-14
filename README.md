@@ -86,7 +86,7 @@ and supports both 32- and 64-bit. `makefile` targets are:
 ```c
 $ make m|t|c|l|t32|t64|c32|c64|l32|l64|s64|r
 
-  pf 2021.02.14 Linux x86_64 (c) 2020 kparc / bsd
+  pf 2021.02.14 Linux aarch64 (c) 2020 kparc / bsd
 
   (%)=(%) (kparc)=(kparc) (kparc)=(kparc) ()=()
 
@@ -100,19 +100,19 @@ $ make m|t|c|l|t32|t64|c32|c64|l32|l64|s64|r
   pmx32 = (         0xffffffff)
   pmx64 = ( 0xffffffffffffffff)
 
-  0|     atw|     atw|  3|  3|          0xdeadbeef| 0x04|  k|  k|(null)|
-  1|     nsl|     nsl|  3|  3|          0xdeadbeef| 0x04|  k|  k|(null)|
-  2|  attila|  attila|  6|  6|          0xdeadbeef| 0x04|  k|  k|(null)|
-  3|    icsa|    icsa|  4|  4|          0xdeadbeef| 0x04|  k|  k|(null)|
-  4|    alex|    alex|  4|  4|          0xdeadbeef| 0x04|  k|  k|(null)|
-  5|    ktye|    ktye|  4|  4|          0xdeadbeef| 0x04|  k|  k|(null)|
-  6|   kparc|   kparc|  5|  5|          0xdeadbeef| 0x04|  k|  k|(null)|
+  0|     atw|     atw|  3|  3|          0xdeadbeef| 0x04|  k|  k|%|asdf|%
+  1|     nsl|     nsl|  3|  3|          0xdeadbeef| 0x04|  k|  k|%|asdf|%
+  2|  attila|  attila|  6|  6|          0xdeadbeef| 0x04|  k|  k|%|asdf|%
+  3|    icsa|    icsa|  4|  4|          0xdeadbeef| 0x04|  k|  k|%|asdf|%
+  4|    alex|    alex|  4|  4|          0xdeadbeef| 0x04|  k|  k|%|asdf|%
+  5|    ktye|    ktye|  4|  4|          0xdeadbeef| 0x04|  k|  k|%|asdf|%
+  6|   kparc|   kparc|  5|  5|          0xdeadbeef| 0x04|  k|  k|%|asdf|%
 
   (empty arglist) = (ok)
 
   PFCH=1 printf('~') = (~)
 
-  PFMX=0 excess arguments (1234567891011) = (01234567891011) (unbound for gcc/clang builds)
+  PFMX=0 excess arguments (1234567891011) = (1234567891011) (unbound for gcc/clang builds)
 
   argc overflow (one)=(one) (two)=(two) (three)=((null)) (four)=((null))
 
