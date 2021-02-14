@@ -1,6 +1,6 @@
 W=-fno-common -fno-asynchronous-unwind-tables -fno-stack-protector
-O=pf
-S=pf.c
+O=t
+S=t.c
 A=`uname -ms`
 F=-DPF -DPFA="\"$A\""
 L=clang
@@ -42,7 +42,7 @@ r:
 	@$G -Wno-format $F -o$O $S -Os -DNOPF -DPFA="\"$A\"" && ./$O
 
 arm64:
-	@$L $F -m64 -DNOLC -nostdlib -ffreestanding -o$O $W $S -Os && ./$O
+	@/opt/clang/bin/clang $F -DNOLC -o$O $W $S -Os && ./$O
 
 c:
 	@rm -f m pf
