@@ -1,6 +1,6 @@
 ## pf(f,a..)
 
-`pf()` is a compact single-header `printf()` shim for embedded systems.
+`pf()` is a single-header drop-in `printf()` replacement for embedded systems in about 40 SLoC of ISO C, and a few handy macros.
 
 ## tl;dr
 
