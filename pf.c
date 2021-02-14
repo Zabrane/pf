@@ -34,14 +34,16 @@ main(int argc, char**argv)
     "   jmn = (%20lld)\n"
     "   jmx = (%20lld)\n"
     "   imn = (%20d)\n"
-    "   imx = (%20d)\n"
-    "  uimx = (%20u)\n",
+    "   imx = (%-20d)\n"
+    "  uimx = (%-20u)\n",
     umx, -jmx, jmx, -imx, imx, uimx);
 
   printf("\n  pmx32 = (%19p)\n  pmx64 = (%19p)\n",uimx, umx);
 
+  printf("\n  0pad0 = (%08d) (%-08d)\n", 77777, 77777);
+
   char *ti;
-  char *t[] = {"atw", "nsl", "attila", "icsa", "alex", "ktye", "kparc"};
+  char *t[] = {"atw", "nsl", "attila", "icsa", "alex", "ktye", "kelas"};
 
   int i = -1;
   int len;
@@ -52,7 +54,7 @@ main(int argc, char**argv)
   {
     ti = t[i];
     int len = strlen(ti);
-    printf("%3d|%-8s|%8s|%3d|%-3d|%20p|%-5p|%3c|%-3c|%%|%s|%%\n", i, ti, ti, len, len, 0xdeadbeef, 0x04, 'k', 'k', "asdf");
+    printf("%3d|%-8s|%8s|%3d|%-3d|%20p|%-5p|%3c|%-3c|%%|%s|%%|\n", i, ti, ti, len, len, 0xdeadbeef, 0x04, 'k', 'k', "kparc");
   }
 
   printf("\n  (empty arglist) = (ok)\n");
