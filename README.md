@@ -28,9 +28,15 @@ what you get:
 just like its real counterpart, `pf()` is extremely brittle, i.e. any mismatch
 between the format string and positional arguments is probably a segfault.
 
-since `tcc` is the best ISO C compiler available, you must define
-the maximum number of arguments at compile time, see `VMX`. for `clang` and `gcc`,
-the number of arguments is unbounded, same as for `printf(3)`.
+since `tcc` is the safest ISO C compiler available, you must define
+the maximum number of arguments at compile time by defining `PFMX`, which
+defaults to `8`. calling `pf` with more than `PFMX` positional arguments under
+`tcc` is a compile-time error.
+
+under `clang` and `gcc` the number of arguments is unlimited, same as
+for `printf(3)`.
+
+
 
 ## test
 
