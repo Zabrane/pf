@@ -71,7 +71,7 @@ your stack.
 
 ## test
 
-`pf.c` is same as `m.c`, slightly more involved.
+`pf.c` is like as `m.c`, only more involved.
 
 it can be built to your target architecture with `clang12`, `gcc10`, `tcc-mob`,
 and supports both 32- and 64-bit. `makefile` targets are:
