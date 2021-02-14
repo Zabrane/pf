@@ -40,9 +40,7 @@ $
 
 generally speaking, there is no portable way to implement a drop-in nostdlib
 replacement for `printf(3)`, since `va_arg` is an architecture-specific
-built-in.
-
-in the unlikely case you want `printf` in a setting where you
+built-in. in the unlikely case you want `printf` in a setting where you
 absolutely must ditch stdlib, `pf` is a simple reality hack that provides
 a bare minimum `printf(3)` at a price of:
 
