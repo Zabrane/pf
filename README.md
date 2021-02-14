@@ -53,8 +53,8 @@ a bare minimum `printf(3)` at a price of:
 
 what you get:
 
-* format string parser recognizes `%[%-][09][.09*]dcups`
-* unsupported features are filtered from output
+* format string parser recognizes `%[%0#-][09][.09*]dcups`
+* unsupported features are filtered out
 * `%d` and `%u` are also long longs, `[lh]` prefixes are nop.
 * freestanding elf ~9kb.
 
