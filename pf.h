@@ -84,7 +84,7 @@ ZI txs(char*x,I f,I p,I l){R txp((S)x,l?l:slen(x),PLR,PCH);}
 #define nx         continue
 
 //! %[%-][09..][.09..*]dcups
-I txpf(char *f,args a,I ac){               //!< (f)ormat string (aka tape), (a)rguments, (a)rg(c)ount
+I txpf(char *f,args a,I ac){P(!f,f)        //!< (f)ormat string (aka tape), (a)rguments, (a)rg(c)ount
  P(PFCH&&(char*)128>f,tx(*(G*)&f))         //!< optional char check for f, see FCH
  G c;I j,i=0,n=0;                          //!< total le(n)gth, arg(i)ndex, curr(c)har
  UI flg,flw,prc;                           //!< fmt flags, field width, precision
