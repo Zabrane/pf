@@ -52,7 +52,7 @@ main(int argc, char**argv)
   {
     ti = t[i];
     int len = strlen(ti);
-    printf("%3d|%-8s|%8s|%3d|%-3d|%20p|%-5p|%3c|%-3c|%%|\n", i, ti, ti, len, len, 0xdeadbeef, 0x04, 'k', 'k');
+    printf("%3d|%-8s|%8s|%3d|%-3d|%20p|%-5p|%3c|%-3c|%%|%s|%%\n", i, ti, ti, len, len, 0xdeadbeef, 0x04, 'k', 'k', "asdf");
   }
 
   printf("\n  (empty arglist) = (ok)\n");
@@ -71,14 +71,14 @@ main(int argc, char**argv)
   //! PFMX
   #ifndef NOPF
   #ifndef __TINYC__
-  printf("\n  PFMX=%d excess arguments (%d%d%d%d%d%d%d%d%d%d%d) = (01234567891011)",
+  printf("\n  PFMX=%d excess arguments (%d%d%d%d%d%d%d%d%d%d%d) = (1234567891011)",
    PFMX, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
   printf(" (unbound for gcc/clang builds)\n");
   #else
   printf("\n  PFMX=%d excess arguments (nop) = (tcc compile-time error)\n", PFMX);
   #endif//TINYC
   #else
-  printf("\n  PFMX=%d excess arguments (%d%d%d%d%d%d%d%d%d%d%d) = (01234567891011)",
+  printf("\n  PFMX=%d excess arguments (%d%d%d%d%d%d%d%d%d%d%d) = (1234567891011)",
    PFMX, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
   printf(" (unbound for printf(3))\n");
   #endif//PF

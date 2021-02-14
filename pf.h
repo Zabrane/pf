@@ -18,8 +18,8 @@
 
 #if defined(__TINYC__)
 #ifndef PFMX
-#define PFMX 8      //!< under tcc, max argcount is mandatory, up to 16
-#pragma message("PFMX is mandatory under tcc, defaulting to 8")
+#define PFMX 8      //!< for tcc, max argcount is mandatory, up to 16
+#pragma message("PFMX is mandatory for tcc, defaulting to 8")
 #endif
 #define PFSZ PFMX
 #else
@@ -34,9 +34,9 @@
 #if NOLC            //!< satisfy minimal freestanding environment
 #include<string.h>
 #define strlen slen
-void *memset(void *d, int c, size_t n)            {char*s=(char*)d;while(n--)*s++=c;return d;}
-void *memcpy(void *d, const void *s, size_t n)    {char*x=(char*)d,*y=(char*)s;while(n--)*x++=*y++;return d;}
-void exit(int);
+_*memset(_*d, I c, size_t n)        {S s=(S)d;W(n--)*s++=c;R d;}
+_*memcpy(_*d, const _*s, size_t n)  {S x=(S)d,*y=(S)s;W(n--)*x++=*y++;R d;}
+_ exit(I);
 #endif
 
 //! modify below this line at your own risk. stay social, reach out.
@@ -80,28 +80,27 @@ ZI txs(char*x,I f,I p,I l){R txp((S)x,l?l:slen(x),PLR,PCH);}
 #define vtx(f,a)   n+=f(a,flg,flw,prc);
 #define va(c,t,f)  C(c,{t _a;varg(_a);vtx(f,_a)})  //!< call f((type)nextarg, options)
 #define Cf(c,fl)   C(c,flg|=FG(fl),f++)            //!< set format bit 1|2|3 (0pad,lpad,#alt)
-#define dbg(s,i)   (txs(s,0,0),txj(i,0,0))
+#define dbg(s,i)   (txs(s,0,0,0),txj(i,0,0,0))
 #define nx         continue
 
 //! %[%-][09..][.09..*]dcups
-I txpf(char *f,args a,I ac){P(!f,f)        //!< (f)ormat string (aka tape), (a)rguments, (a)rg(c)ount
- P(PFCH&&(char*)128>f,tx(*(G*)&f))         //!< optional char check for f, see FCH
- G c;I j,i=0,n=0;                          //!< total le(n)gth, arg(i)ndex, curr(c)har
- UI flg,flw,prc;                           //!< fmt flags, field width, precision
- W(c=*f++){                                //!< while more chars left on tape,
-  flg=prc=0,j=1;                           //!< reset state, then:
-  Z('%'-c,n+=tx(c);nx)W(j)                 //!< echo c unless %, otherwise:
-  SW(c=*f,Cf('-',0)Cf('0',1)Cf('#',2),j=0) //!< scan flags (%[-0#])
-  flw=sI(f,&j),f+=j,c=*f;                  //!< scan field width (%flw)
-  Z('.'==c,prc=sI(++f,&j);f+=j;c=*f;       //!< scan precision (%.prc)
-   Z(!j,Z('*'-c,f++;nx)                    //!< %.[^09*] is empty field
-    c=*++f;varg(prc)))c=*f;                //!< scan positional precision (%.*)
-  W('l'==c||'h'==c)c=*++f;                 //!< skip [lh..] nyi
-  //txs("\nline: ",0,0),txs(f,0,slen(f)-1),dbg(" ac: ",ac),dbg(" i: ",i),tx('\n');
-  Z(ac==i,vtx(txs,"(null)"))               //!< output (null) on argcount overflow
-  SW(c,                                    //!< dispatch by conversion specifier:
-   va('c',G,txb)va('d',J,txj)va('u',UJ,txu)
-   va('p',UJ,txx)va('s',char*,txs)C('%',tx(c)))
+I txpf(char*f,args a,I ac){P(!f,f)             //!< (f)ormat string (aka tape), (a)rguments, (a)rg(c)ount
+ P(PFCH&&(char*)128>f,tx(*(G*)&f))             //!< optional char check for f, see PFCH
+ G c;I j,i=0,n=0;                              //!< total le(n)gth, arg(i)ndex, curr(c)har
+ UI flg,flw,prc;                               //!< fmt flags, field width, precision
+ W(c=*f++){                                    //!< while more chars left on tape,
+  flg=prc=0,j=1;                               //!< reset state, then:
+  Z('%'-c,n+=tx(c);nx)                         //!< echo c unless %, otherwise:
+  Z('%'==*f,f++,n+=tx(c);nx)                   //!< %% is literal %
+  W(j)SW(c=*f,Cf('-',0)Cf('0',1)Cf('#',2),j=0) //!< scan flags (%[-0#])
+  flw=sI(f,&j),f+=j,c=*f;                      //!< scan field width (%flw)
+  Z('.'==c,prc=sI(++f,&j);f+=j;c=*f;           //!< scan precision (%.prc)
+   Z(!j,Z('*'-c,f++;nx)                        //!< %.[^09*] is empty field
+    c=*++f;varg(prc)))c=*f;                    //!< scan positional precision (%.*)
+  W('l'==c||'h'==c)c=*++f;                     //!< [lh..] are nop
+  Z(ac==i,vtx(txs,"(null)"))                   //!< output (null) on argcount overflow.
+  SW(c,                                        //!< dispatch by conversion specifier:
+   va('c',G,txb)va('d',J,txj)va('u',UJ,txu)va('p',UJ,txx)va('s',char*,txs))
   f++;}R n;}
 
 #pragma GCC diagnostic pop
