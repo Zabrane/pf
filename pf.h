@@ -4,9 +4,9 @@
 #ifndef PF_H
 #define PF_H
 
-#define PFV1 2021  //!< major
-#define PFV2 02    //!< minor
-#define PFV3 14    //!< patch
+#define PFV1 2021       //!< major
+#define PFV2 02         //!< minor
+#define PFV3 14         //!< patch
 #define PFL "(c) 2020 kparc / bsd"
 
 #ifndef NOPF
@@ -18,7 +18,7 @@
 
 #if defined(__TINYC__)
 #ifndef PFMX
-#define PFMX 8      //!< for tcc, max argcount is mandatory, up to 16
+#define PFMX 8   //!< tcc max argcount, up to 16
 #pragma message("PFMX is mandatory for tcc, defaulting to 8")
 #endif
 #define PFSZ PFMX
@@ -80,32 +80,30 @@ ZI txs(char*x,I f,I p,I l){R txp((S)x,l?l:slen(x),PLR,PCH);}
 #define vtx(f,a)   n+=f(a,flg,flw,prc);
 #define va(c,t,f)  C(c,{t _a;varg(_a);vtx(f,_a)})  //!< call f((type)nextarg, options)
 #define Cf(c,fl)   C(c,flg|=FG(fl),f++)            //!< set format bit 1|2|3 (0pad,lpad,#alt)
+#define echo       n+=tx(c);continue               //!< tx single byte and advance
 #define dbg(s,i)   (txs(s,0,0,0),txj(i,0,0,0))
-#define nx         continue
 
 //! %[%-][09..][.09..*]dcups
 I txpf(char*f,args a,I ac){P(!f,f)             //!< (f)ormat string (aka tape), (a)rguments, (a)rg(c)ount
  P(PFCH&&(char*)128>f,tx(*(G*)&f))             //!< optional char check for f, see PFCH
  G c;I j,i=0,n=0;                              //!< total le(n)gth, arg(i)ndex, curr(c)har
  UI flg,flw,prc;                               //!< fmt flags, field width, precision
- W(c=*f++){                                    //!< while more chars left on tape,
+ W(c=*f++){                                    //!< while more chars left on tape:
+  Z('%'-c,echo)Z('%'==*f,f++,echo)             //!< echo c until first %, %% is literal %, otherwise:
   flg=prc=0,j=1;                               //!< reset state, then:
-  Z('%'-c,n+=tx(c);nx)                         //!< echo c unless %, otherwise:
-  Z('%'==*f,f++,n+=tx(c);nx)                   //!< %% is literal %
-  W(j)SW(c=*f,Cf('-',0)Cf('0',1)Cf('#',2),j=0) //!< scan flags (%[-0#])
+  W(j)SW(c=*f,Cf('-',0)Cf('0',1)Cf('#',2),j=0) //!< scan format flags (%[-0#])
   flw=sI(f,&j),f+=j,c=*f;                      //!< scan field width (%flw)
   Z('.'==c,prc=sI(++f,&j);f+=j;c=*f;           //!< scan precision (%.prc)
-   Z(!j,Z('*'-c,f++;nx)                        //!< %.[^09*] is empty field
+   Z(!j,Z('*'-c,f++;continue)                  //!< invalid precision is empty field
     c=*++f;varg(prc)))c=*f;                    //!< scan positional precision (%.*)
-  W('l'==c||'h'==c)c=*++f;                     //!< [lh..] are nop
-  Z(ac==i,vtx(txs,"(null)"))                   //!< output (null) on argcount overflow.
-  SW(c,                                        //!< dispatch by conversion specifier:
-   va('c',G,txb)va('d',J,txj)va('u',UJ,txu)va('p',UJ,txx)va('s',char*,txs))
+  W('l'==c||'h'==c)c=*++f;                     //!< skip [lh..]
+  Z(ac==i,vtx(txs,"(null)"))                   //!< print (null) on argc overflow
+  SW(c,va('c',G,txb)va('d',J,txj)va('u',UJ,txu)va('p',UJ,txx)va('s',char*,txs))
   f++;}R n;}
 
 #pragma GCC diagnostic pop
 #else
-#include<string.h>                       //!< use stock printf
+#include<string.h>                            //!< use stock printf
 #endif//NOPF
 
 #endif//PF_H
