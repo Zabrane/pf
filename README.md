@@ -48,7 +48,7 @@ a bare minimum `printf(3)` at a price of:
 
 * one syscall `write(2)`.
 * one warning `int-conversion`, suppressed.
-* total loss thread safety.
+* total loss of thread safety.
 * no floats.
 
 what you get:
@@ -125,14 +125,16 @@ $
 
 > what's the idea?
 
-`pf()` is a variadic macro which is used to initialize contents of
-an anonymous uint64 array (of length `VMX` in case of `tcc`), which is passed 
-to `txpf()` on stack. `txpf()` downcasts longs according to the format 
-specification, and prints them.
+`pf(f,a...)` is a variadic macro which is used to initialize an anonymous 
+array of uint64's (of maximal length `PFMX` in case of `tcc`) with the contents of `a...` on
+stack, and count its elements. array pointer and its element count are both passed to 
+`txpf()`, which `txpf()` downcasts longs according to the format specification, and prints them.
 
 > what's the catch?
 
-stack overpressure. too many positional arguments will smash your stack. therefore:
+since arguments of any type are upcast to `unsigned long long` and passed exclusively on stack,
+`pf()` wins portability in return for much less efficient use of resources compared to ABI-specific 
+`va_arg` routines. use those if you can. too many positional arguments will smash your stack, therefore:
 
 a) if you are using `tcc`, choose `VMX` wisely.
 
@@ -146,10 +148,6 @@ c) protect your stack.
 
 yes, but if you're lucky to target some semblance of an operating system to write
 home about, you should probably use local `printf(3)`.
-
-because this way the software is faster to write, easier to read, and safer to run.
-your mileage may vary. the code is subject to terms of bsd-2-clause, except `_.h` which
-is placed in public domain by the [regents of kparc](https://github.com/kparc).
 
 > why two headers?
 
