@@ -47,10 +47,10 @@ _ exit(I);
 typedef union{UJ uj;}arg;typedef arg args[PFSZ];                                    //!< use union to avoid gcc bug
 #define PU(fn,t) ZZ S fn(S s,t i){t j;do*--s='0'+i-10*(j=i/10);W(i=j);R s;}         //!< parse signed/unsigned
 #define TU(fn,t,u) ZZ I fn(t x,I f,I p,I l){I n;S r=jS(x,&n,u);R txp(r,n,PLR,PCH);} //!< tramsmit signed/unsigned
-#define FG(f)  (1u<<f)              //!< flag bit
-#define fC(fb) ((f&FG(fb))==FG(fb)) //!< check flag bit in f
-#define PCH    (" 0"[fC(2)])        //!< pad char
-#define PLR    ((0<fC(1))?-p:p)     //!< pad l/r
+#define FG(f)  (1u<<f)               //!< flag bit
+#define fC(fb) ((f&FG(fb))==FG(fb))  //!< check flag bit in f
+#define PCH    (" 0"[fC(2)&&!fC(1)]) //!< pad w/zero, nop when rpad
+#define PLR    (fC(1)?-p:p)          //!< pad l/r
 
 //! strlen [u]ltoa ato[u]l hex
 ZG xb[26];ZI slen(char*s){I r=0;W(*s++)r++;R r;}ZS ng(S s){R*--s='-',s;}PU(pj,J)PU(pu,UJ);
