@@ -164,17 +164,6 @@ c) protect your stack.
 yes, but if you're lucky to target some semblance of an operating system to write
 home about, you should probably use local `printf(3)`.
 
-> why the dummy `union{UJ}`?
-
-to trick `gcc` into thinking that ptr-to-ULL coercion is not an error (`tcc`
-and `clang` are aware of that).
-
-> why `int-conversion` warning?
-
-ptr-to-ULL warning can be safely ignored, no lossy casts are taking place.
-
-> why this software is written this way?
-
 because this way the software is faster to write, easier to read, and safer to run.
 your mileage may vary. the code is subject to terms of bsd-2-clause, except `_.h` which
 is placed in public domain by the [regents of kparc](https://github.com/kparc).
@@ -193,5 +182,23 @@ not really. there is one extra configuration parameter which breaks posix
 compatibility and is therefore not documented. there are hardly any 
 user-serviceable parts in the code, so please let us now if you think
 you have found a bug, or have a great feature suggestion in mind.
+
+## technically inclined faq
+
+> why the dummy `union{UJ}`?
+
+to trick `gcc` into thinking that ptr-to-ULL coercion is not an error (`tcc`
+and `clang` are aware of that).
+
+> why `int-conversion` warning is suppressed?
+
+it is only suppressed in `pf.h`, not in your code. ptr-to-ULL warning is
+safe to be ignored, no lossy casts are taking place.
+
+> why this software is written this way?
+
+because this way the software is faster to write, easier to read, and safer to run.
+your mileage may vary. the code is subject to terms of bsd-2-clause, except `_.h` which
+is placed in public domain by the [regents of kparc](https://github.com/kparc).
 
 `//:~`
