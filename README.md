@@ -4,7 +4,7 @@
 
 ## tl;dr
 
-```
+```c
 $ cd pf && cat m.c
 #include"pf.h"
 int
@@ -20,7 +20,7 @@ main(int argc, char **argv)
 
 try it:
 
-```
+```bash
 $ make m
 
  gcc -Os -DPF -DNOLC -nostdlib -ffreestanding -Werror -pedantic -om m.c s.S
@@ -80,7 +80,7 @@ and supports both 32- and 64-bit. `makefile` targets are:
 * `s64` dynamic library (not really useful for intended use cases)
 * `r` reference output (uses `printf` instead of `pf`)
 
-```
+```c
 $ make m|t|c|l|t32|t64|c32|c64|l32|l64|s64|r
 
   pf 1.0 Linux x86_64 (c) 2020 kparc / bsd
