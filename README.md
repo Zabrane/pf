@@ -1,8 +1,18 @@
 ## pf(f,a..)
 
-`pf.h` is a minimalisic `printf()` replacement meant for embedded systems, in about 40 sloc of C (plus a few handy macros).
+[pf.h](https://github.com/kelas/pf/blob/master/pf.c) is a `printf()` shim intended for embedded systems, in about 40 sloc of C (plus a few handy macros).
+
+what you get:
+
+* format string parser recognizes `%[%0#-][09][.09*]dcups`
+* `%d` and `%u` are also longs, `[lh]` prefixes are nop.
+* total absence of thread safety and floats.
+* unsupported features are filtered out.
+* freestanding elf ~9kb.
 
 ## tl;dr
+
+minimal test:
 
 ```c
 $ cd pf && cat m.c
@@ -46,15 +56,6 @@ a bare minimum `printf(3)` at a price of:
 
 * one syscall `write(2)`.
 * one warning `int-conversion`, suppressed.
-* total loss of thread safety.
-* no floats.
-
-what you get:
-
-* format string parser recognizes `%[%0#-][09][.09*]dcups`
-* unsupported features are filtered out
-* `%d` and `%u` are also long longs, `[lh]` prefixes are nop.
-* freestanding elf ~9kb.
 
 just like its real counterpart, `pf()` is extremely brittle. however, it
 is a bit safer than `printf()` and performs some extra checks, e.g. stray
