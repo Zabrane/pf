@@ -113,29 +113,8 @@ $ make m|t|c|l|t32|t64|c32|c64|l32|l64|s64|r
 
   argc overflow (one)=(one) (two)=(two) (three)=((null)) (four)=((null))
 
-  nesting+retval: s=(i uncover the soul-destroying abhorrence) p=(0xcafebabe)=(3405691582) c=(K) eot=(0x04) n=(108) //:~
+  nesting+retval: s=("i uncover the soul-destroying abhorrence") p=(0xcafebabe)=(3405691582) c=(K) eot=(0x04) n=(108) //:~
 
-  (%)=(%) (kparc)=(kparc) (kparc)=(kparc) ()=()
-
-   umx = (18446744073709551615)
-   jmn = (-9223372036854775807)
-   jmx = ( 9223372036854775807)
-   imn = (         -2147483647)
-   imx = (          2147483647)
-  uimx = (          4294967295)
-
-  pmx32 = (         0xffffffff)
-  pmx64 = ( 0xffffffffffffffff)
-
-  0|atw     |     atw|  3|3  |  0xdeadbeef|0x04 |  k|k  |%|
-  1|nsl     |     nsl|  3|3  |  0xdeadbeef|0x04 |  k|k  |%|
-  2|attila  |  attila|  6|6  |  0xdeadbeef|0x04 |  k|k  |%|
-  3|icsa    |    icsa|  4|4  |  0xdeadbeef|0x04 |  k|k  |%|
-  4|alex    |    alex|  4|4  |  0xdeadbeef|0x04 |  k|k  |%|
-  5|ktye    |    ktye|  4|4  |  0xdeadbeef|0x04 |  k|k  |%|
-  6|kparc   |   kparc|  5|5  |  0xdeadbeef|0x04 |  k|k  |%|
-
- pf: s=(i uncover the soul-destroying abhorrence) p=(0xcafebabe) c=(K) eot=(0x04) n=(53) //:~
 ```
 
 ## faq
