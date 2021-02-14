@@ -1,6 +1,6 @@
 ## pf(f,a..)
 
-[pf.h](https://github.com/kelas/pf/blob/master/pf.c) is a `printf()` shim intended for embedded systems, in about 40 sloc of C (plus a few handy macros).
+[pf.h](https://github.com/kelas/pf/blob/master/pf.h) is a `printf()` shim intended for embedded systems, in about 40 sloc of C (plus a few handy macros).
 
 what you get:
 
@@ -72,7 +72,7 @@ your stack.
 
 ## test
 
-`pf.c` is like as `m.c`, only more involved.
+`t.c` is like `m.c`, only more involved.
 
 it can be built to your target architecture with `clang12`, `gcc10`, `tcc-mob`,
 and supports both 32- and 64-bit. `makefile` targets are:
