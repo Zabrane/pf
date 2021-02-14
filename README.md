@@ -72,16 +72,16 @@ your stack.
 
 ## test
 
-`pf.c` is same as `m.c`, only slightly more involved.
+`pf.c` is same as `m.c`, slightly more involved.
 
 it can be built to your target architecture with `clang12`, `gcc10`, `tcc-mob`,
 and supports both 32- and 64-bit. `makefile` targets are:
 
 * `[tcl]` fat builds to default arch, `-O0 -g`
 * `[tcl]32` fat builds to 32-bit
-* `[tcl]64` nostdlib freestanding `-Os` 64-bit (linux-only, see `s.S`)
-* `s64` dynamic library (not really useful for intended use cases)
-* `r` reference output (uses `printf` instead of `pf`)
+* `[tcl]64` nostdlib freestanding `-Os` (linux/x86_64 only, see `s.S`)
+* `s64` dynamic library (not really useful)
+* `r` reference output (use `printf` instead of `pf`)
 
 ```c
 $ make m|t|c|l|t32|t64|c32|c64|l32|l64|s64|r
@@ -164,7 +164,7 @@ compatibility and is therefore not documented. there are hardly any
 user-serviceable parts in the code, so please let us now if you think
 you have found a bug, or have a great feature suggestion in mind.
 
-## technically inclined faq
+## faq for the technically inclined
 
 > why the dummy `union{UJ}`?
 
