@@ -178,7 +178,6 @@ safe to be ignored, no lossy casts are taking place.
 > why this software is written this way?
 
 because this way the software is faster to write, easier to read, and safer to run.
-your mileage may vary. the code is subject to terms of bsd-2-clause, except `_.h` which
-is placed in public domain by the [regents of kparc](https://github.com/kparc).
+your mileage may vary.
 
 `//:~`
