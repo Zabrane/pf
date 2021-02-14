@@ -31,25 +31,26 @@
 #define PFCH 0      //!< if f<128, treat it as char (transmit and return 1)     (!posix)
 #endif
 
+#include"_.h"
+#include<unistd.h> //!< write(2)
+
 #if NOLC            //!< satisfy minimal freestanding environment
-#include<string.h>
+//#include<string.h>
 #define strlen slen
 _*memset(_*d, I c, size_t n)        {S s=(S)d;W(n--)*s++=c;R d;}
-_*memcpy(_*d, const _*s, size_t n)  {S x=(S)d,*y=(S)s;W(n--)*x++=*y++;R d;}
+_*memcpy(_*d, const _*s, size_t n)  {S x=(S)d,y=(S)s;W(n--)*x++=*y++;R d;}
 _ exit(I);
 #endif
 
-//! modify below this line at your own risk. stay social, reach out.
+//! modify below this line at your own risk.
 
-#include"_.h"
-#include<unistd.h> //!< write(2)
 typedef union{UJ uj;}arg;typedef arg args[PFSZ];                                    //!< use union to avoid gcc bug
 #define PU(fn,t) ZZ S fn(S s,t i){t j;do*--s='0'+i-10*(j=i/10);W(i=j);R s;}         //!< parse signed/unsigned
 #define TU(fn,t,u) ZZ I fn(t x,I f,I p,I l){I n;S r=jS(x,&n,u);R txp(r,n,PLR,PCH);} //!< tramsmit signed/unsigned
 #define FG(f)  (1u<<f)              //!< flag bit
 #define fC(fb) ((f&FG(fb))==FG(fb)) //!< check flag bit in f
-#define PCH    (" 0"[fC(1)])        //!< pad char
-#define PLR    ((0<fC(2))?-p:p)     //!< pad l/r
+#define PCH    (" 0"[fC(2)])        //!< pad char
+#define PLR    ((0<fC(1))?-p:p)     //!< pad l/r
 
 //! strlen [u]ltoa ato[u]l hex
 ZG xb[26];ZI slen(char*s){I r=0;W(*s++)r++;R r;}ZS ng(S s){R*--s='-',s;}PU(pj,J)PU(pu,UJ);
@@ -65,8 +66,8 @@ ZI txx(UJ j,I f,I p,I l){I n=jX(j)+2;S b=xb+25-n;*b='0',b[1]='x';R txp(b,n,PLR,P
 ZI txs(char*x,I f,I p,I l){R txp((S)x,l?l:slen(x),PLR,PCH);}
 
 #ifdef __TINYC__
-#define NRg(_1,_2,_3,_4,_5,_6,_7,_8,_9,_10,_11,_12,_13,_14,_15,_16,N,...) N
-#define NRG(...) NRg(__VA_ARGS__, 16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1)
+#define nrg(_1,_2,_3,_4,_5,_6,_7,_8,_9,_10,_11,_12,_13,_14,_15,_16,N,...) N
+#define NRG(...) nrg(__VA_ARGS__, 16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1)
 #define pf(f,a...) ({args pfa={a};txpf(f,pfa,NRG(a));})    //!< coerce arguments of pf() to a stack array of unsigned long longs
 #else
 #define pf(f,a...) ({args pfa={a};txpf(f,pfa,CNT(pfa));})  //!< coerce arguments of pf() to a stack array of unsigned long longs
@@ -91,7 +92,7 @@ I txpf(char*f,args a,I ac){P(!f,f)             //!< (f)ormat string (aka tape), 
  W(c=*f++){                                    //!< while more chars left on tape:
   Z('%'-c,echo)Z('%'==*f,f++,echo)             //!< echo c until first %, %% is literal %, otherwise:
   flg=prc=0,j=1;                               //!< reset state, then:
-  W(j)SW(c=*f,Cf('-',0)Cf('0',1)Cf('#',2),j=0) //!< scan format flags (%[-0#])
+  W(j)SW(c=*f,Cf('-',1)Cf('0',2)Cf('#',3),j=0) //!< scan format flags (%[-0#])
   flw=sI(f,&j),f+=j,c=*f;                      //!< scan field width (%flw)
   Z('.'==c,prc=sI(++f,&j);f+=j;c=*f;           //!< scan precision (%.prc)
    Z(!j,Z('*'-c,f++;continue)                  //!< invalid precision is empty field
